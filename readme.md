@@ -44,7 +44,7 @@ npm start
 ### Serveur local dans un container docker
 
 ```bash
-# Démarre le serveur de fichier dans un conteneur Docker
+# démarre le serveur de fichier dans un conteneur Docker
 # en mode `development`
 # écoute sur http://localhost:NODE_PORT
 docker-compose -f ./docker-compose.localhost.yml up --build
@@ -56,11 +56,10 @@ Pré-requis:
 
 * une installation locale active de https://github.com/jwilder/nginx-proxy
 * un certificat ssl auto-signé
-
-[instructions](https://medium.com/@francoisromain/set-a-local-web-development-environment-with-custom-urls-and-https-3fbe91d2eaf0)
+* [instructions](https://medium.com/@francoisromain/set-a-local-web-development-environment-with-custom-urls-and-https-3fbe91d2eaf0)
 
 ```bash
-# Démarre l'application dans un container Docker
+# démarre l'application dans un container Docker
 # en mode `production`
 # accessible sur https://flux.camino.local
 docker-compose -f ./docker-compose.local.yml up --build
@@ -71,8 +70,7 @@ docker-compose -f ./docker-compose.local.yml up --build
 Pré-requis:
 
 * une installation active de https://github.com/jwilder/nginx-proxy
-
-[instructions](https://medium.com/@francoisromain/host-multiple-websites-with-https-inside-docker-containers-on-a-single-server-18467484ab95)
+* [instructions](https://medium.com/@francoisromain/host-multiple-websites-with-https-inside-docker-containers-on-a-single-server-18467484ab95)
 
 ```bash
 docker-compose -f ./docker-compose.yml up --build
