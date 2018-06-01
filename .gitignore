@@ -1,2 +1,4 @@
 node_modules
 .env
+/public/geojson/*
+!/public/geojson/readme.txt

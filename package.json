@@ -6,7 +6,7 @@
   "scripts": {
     "build": "node ./worker/index.js",
     "dev": "onchange '**/*.js' -i -- npm run build",
-    "start": "node ./index.js"
+    "start": "npm run build && node ./index.js"
   },
   "author": "",
   "license": "ISC",

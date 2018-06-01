@@ -5,15 +5,37 @@ const apiFetch = require('./_utils/api-fetch')
 
 const apiUrl = process.env.API_URL
 
-const query = fileImport(__dirname, 'queries/titres.gql')
+const query = fileImport(__dirname, 'queries/geojson.gql')
+
+const domaineIds = ['m', 'h', 's', 'g', 'c']
 
 const variables = {
-  first: 3
+  typeIds: [
+    'apx',
+    'arc',
+    'arg',
+    'axm',
+    'prx',
+    'prh',
+    'pxc',
+    'pxg',
+    'pxm',
+    'cxx'
+  ],
+  statutIds: ['val'],
+  policeIds: [true, false]
 }
 
-apiFetch(apiUrl, query, variables).then(t =>
+const fetchAndFileCreate = async (u, q, v, d) => {
+  v.domaineIds = [d]
+  const data = await apiFetch(u, q, v)
+
   fileCreate(
-    __dirname + '/../public/geojson/test.json',
-    JSON.stringify(t, null, 2)
+    `${__dirname}/../public/geojson/${d}-titres.geojson`,
+    JSON.stringify(data, null, 2)
   )
+}
+
+domaineIds.forEach(domaine =>
+  fetchAndFileCreate(apiUrl, query, variables, domaine)
 )
