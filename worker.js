@@ -12,5 +12,5 @@ const variables = {
 }
 
 apiFetch(apiUrl, query, variables).then(t =>
-  fileCreate('exports/geojson/test.json', JSON.stringify(t, null, 2))
+  fileCreate('public/geojson/test.json', JSON.stringify(t, null, 2))
 )

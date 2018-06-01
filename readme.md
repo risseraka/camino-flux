@@ -33,10 +33,10 @@ Application en cours de développement, provisoirement accessible [ici](https://
 npm install
 
 # Créé les fichiers geojson des titres miniers à partir de l'api
-# et les enregistre dans le dossier /index/geojson
+# et les enregistre dans le dossier /public/geojson
 npm run dist
 
-# Démarre le serveur qui sert les fichiers du dossier /index
+# Démarre le serveur qui sert les fichiers du dossier /public
 npm start
 ```
 

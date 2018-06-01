@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "front-s": "node ./_front/s/index.js",
-    "front-s-w": "onchange '**/*.js' -i -- npm run front-s",
+    "build": "node ./worker.js",
+    "dev": "onchange '**/*.js' -i -- npm run build",
     "start": "node ./server.js"
   },
   "author": "",
