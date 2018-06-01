@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "node ./worker.js",
+    "build": "node ./worker/index.js",
     "dev": "onchange '**/*.js' -i -- npm run build",
-    "start": "node ./server.js"
+    "start": "node ./index.js"
   },
   "author": "",
   "license": "ISC",
