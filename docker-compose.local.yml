@@ -1,0 +1,19 @@
+# Démarrage du serveur à http://localhost:${NODE_PORT}
+version: "3"
+
+services:
+
+  flux:
+    build: .
+    environment:
+      NODE_ENV: production
+      VIRTUAL_HOST: flux.camino.local
+      VIRTUAL_PORT: ${NODE_PORT}
+      NODE_PORT: ${NODE_PORT}
+    expose:
+      - ${NODE_PORT}
+
+networks:
+  default:
+    external:
+      name: nginx-proxy

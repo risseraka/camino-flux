@@ -1,0 +1,14 @@
+version: "3"
+
+services:
+
+  flux:
+    image: node:alpine
+    volumes:
+      - ./:/app
+    working_dir: /app
+    environment:
+      NODE_ENV: development
+    ports:
+      - ${NODE_PORT}:${NODE_PORT}
+    command: npm run start
