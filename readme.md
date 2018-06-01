@@ -10,9 +10,6 @@ Application en cours de développement, provisoirement accessible [ici](https://
 
 * Node.js
 * Express.js
-
-### Outils
-
 * Eslint
 * Prettier
 * Standardjs
