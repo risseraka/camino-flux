@@ -5,4 +5,5 @@ RUN npm install
 COPY .env ./
 COPY index.js ./
 COPY worker worker/
+COPY public public/
 CMD ["npm", "start"]
