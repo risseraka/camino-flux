@@ -28,11 +28,11 @@ const variables = {
 
 const fetchAndFileCreate = async (u, q, v, d) => {
   v.domaineIds = [d]
-  const data = await apiFetch(u, q, v)
+  const res = await apiFetch(u, q, v)
 
   fileCreate(
     `${__dirname}/../public/geojson/${d}-val.geojson`,
-    JSON.stringify(data, null, 2)
+    JSON.stringify(res.data.geojsonMultiPolygons, null, 2)
   )
 }
 
