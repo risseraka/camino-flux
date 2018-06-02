@@ -47,6 +47,10 @@ query Geojson(
           ...sub
         }
       }
+      geometry {
+        type
+        coordinates
+      }
     }
   }
 }
