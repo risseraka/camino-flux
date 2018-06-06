@@ -2,13 +2,13 @@ query Geojson(
   $typeIds: [TypeId!]
   $domaineIds: [DomaineId]
   $statutIds: [StatutId!]
-  $policeIds: [Boolean!]
+  $polices: [Boolean!]
 ) {
   geojsonMultiPolygons(
-    typeId: $typeIds
-    domaineId: $domaineIds
-    statutId: $statutIds
-    police: $policeIds
+    typeIds: $typeIds
+    domaineIds: $domaineIds
+    statutIds: $statutIds
+    polices: $polices
   ) {
     type
     features {

@@ -23,7 +23,8 @@ const variables = {
     'cxx'
   ],
   statutIds: ['val'],
-  policeIds: [true, false]
+  polices: [true, false],
+  substances: []
 }
 
 const fetchAndFileCreate = async (u, q, v, d) => {
