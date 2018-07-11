@@ -26,17 +26,13 @@ const variables = {
   statutIds: ['val'],
   substances: []
 }
-
-const fetchAndFileCreate = async (u, q, v, d) => {
-  v.domaineIds = [d]
-  const res = await apiFetch(u, q, v)
+const apiFetchAndFileCreate = async d => {
+  const v = Object.assign(variables, { domaineIds: [d] })
+  const res = await apiFetch(apiUrl, query, v)
   const titres = res.data.titres.map(t => titreFormat(t))
-  fileCreate(
-    `${__dirname}/../public/geojson/titres-${d}.geojson`,
-    JSON.stringify(titres, null, 2)
-  )
+  const fileContent = JSON.stringify(titres, null, 2)
+  const fileName = `${__dirname}/../public/geojson/titres-${d}.geojson`
+  fileCreate(fileName, fileContent)
 }
 
-domaineIds.forEach(domaine =>
-  fetchAndFileCreate(apiUrl, query, variables, domaine)
-)
+domaineIds.forEach(apiFetchAndFileCreate)
