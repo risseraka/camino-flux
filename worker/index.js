@@ -2,12 +2,13 @@ require('dotenv').config()
 const fileImport = require('./_utils/file-import')
 const fileCreate = require('./_utils/file-create')
 const apiFetch = require('./_utils/api-fetch')
+const titreFormat = require('./titre-format')
 
 const apiUrl = process.env.API_URL
 
-const query = fileImport(__dirname, 'queries/geojson.gql')
+const query = fileImport(__dirname, 'queries/titres.gql')
 
-const domaineIds = ['m', 'h', 's', 'g', 'c']
+const domaineIds = ['m', 'h', 's', 'g', 'c', 'w', 'a']
 
 const variables = {
   typeIds: [
@@ -23,17 +24,16 @@ const variables = {
     'cxx'
   ],
   statutIds: ['val'],
-  polices: [true, false],
   substances: []
 }
 
 const fetchAndFileCreate = async (u, q, v, d) => {
   v.domaineIds = [d]
   const res = await apiFetch(u, q, v)
-
+  const titres = res.data.titres.map(t => titreFormat(t))
   fileCreate(
-    `${__dirname}/../public/geojson/${d}-val.geojson`,
-    JSON.stringify(res.data.geojsonMultiPolygons, null, 2)
+    `${__dirname}/../public/geojson/titres-${d}.geojson`,
+    JSON.stringify(titres, null, 2)
   )
 }
 
