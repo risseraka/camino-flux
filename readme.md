@@ -8,18 +8,18 @@ Application en cours de développement, provisoirement accessible [ici](https://
 
 ## Technologies
 
-* Node.js
-* Express.js
-* Eslint
-* Prettier
-* Standardjs
+- Node.js
+- Express.js
+- Eslint
+- Prettier
+- Standardjs
 
 ---
 
 ## Configuration
 
-* Renommer le fichier `.env.example` en `.env`.
-* Compléter le fichier `env`.
+- Renommer le fichier `.env.example` en `.env`.
+- Compléter le fichier `env`.
 
 ---
 
@@ -41,39 +41,44 @@ npm start
 
 ## Docker
 
-### Serveur local dans un container docker
+### Environnement de développement
 
 ```bash
-# démarre le serveur de fichier dans un conteneur Docker
+# démarre l'application un conteneur Docker
 # en mode `development`
-# écoute sur http://localhost:NODE_PORT
-docker-compose -f ./docker-compose.localhost.yml up --build
+# accessible à http://localhost:NODE_PORT
+docker-compose -f ./docker-compose.local.yml up --build
 ```
 
-### Tester l'application en local dans un environement de production
+### Environnement de test
+
+Pour tester l'application en local dans un environnement de production
 
 Pré-requis:
 
-* une installation locale active de https://github.com/jwilder/nginx-proxy
-* un certificat ssl auto-signé
-* [instructions](https://medium.com/@francoisromain/set-a-local-web-development-environment-with-custom-urls-and-https-3fbe91d2eaf0)
+- une installation locale active de https://github.com/jwilder/nginx-proxy
+- un certificat ssl auto-signé
+- [instructions](https://medium.com/@francoisromain/set-a-local-web-development-environment-with-custom-urls-and-https-3fbe91d2eaf0)
 
 ```bash
 # démarre l'application dans un container Docker
 # en mode `production`
-# accessible sur https://flux.camino.local
+# accessible à https://flux.camino.local
 docker-compose -f ./docker-compose.local.yml up --build
 ```
 
-### Serveur de production
+### Environnement de production
 
 Pré-requis:
 
-* une installation active de https://github.com/jwilder/nginx-proxy
-* [instructions](https://medium.com/@francoisromain/host-multiple-websites-with-https-inside-docker-containers-on-a-single-server-18467484ab95)
+- une installation active de https://github.com/jwilder/nginx-proxy
+- [instructions](https://medium.com/@francoisromain/host-multiple-websites-with-https-inside-docker-containers-on-a-single-server-18467484ab95)
 
 ```bash
-docker-compose -f ./docker-compose.yml up --build
+# démarre l'application et la base de données dans un container Docker
+# en mode `production`
+# accessible à http://flux.camino.pw
+docker-compose -f ./docker-compose.ovh.yml up -d --build
 ```
 
 ---
@@ -88,10 +93,10 @@ Voir `contributing.md` (en anglais) pour plus d'infos.
 
 ### Production
 
-* [La Fabrique Numérique, Ministère de la transition écologique et solidaire](https://www.ecologique-solidaire.gouv.fr/inauguration-fabrique-numerique-lincubateur-des-ministeres-charges-lecologie-et-des-territoires)
+- [La Fabrique Numérique, Ministère de la transition écologique et solidaire](https://www.ecologique-solidaire.gouv.fr/inauguration-fabrique-numerique-lincubateur-des-ministeres-charges-lecologie-et-des-territoires)
 
 #### Équipe
 
-* Guillaume Levieux, intrapreneur
-* Joeffrey Arruyer, coach
-* [François Romain](http://francoisromain.com), développeur
+- Guillaume Levieux, intrapreneur
+- Joeffrey Arruyer, coach
+- [François Romain](http://francoisromain.com), développeur
