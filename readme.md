@@ -31,7 +31,7 @@ npm install
 
 # Créé les fichiers geojson des titres miniers à partir de l'api
 # et les enregistre dans le dossier /public/geojson
-npm run dist
+npm run build
 
 # Démarre le serveur qui sert les fichiers du dossier /public
 npm start

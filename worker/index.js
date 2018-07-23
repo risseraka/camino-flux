@@ -8,23 +8,10 @@ const apiUrl = process.env.API_URL
 
 const query = fileImport(__dirname, 'queries/titres.gql')
 
-const domaineIds = ['m', 'h', 's', 'g', 'c', 'w', 'a']
+const domaineIds = ['m', 'h', 's', 'g', 'c', 'w', 'r']
 
 const variables = {
-  typeIds: [
-    'apx',
-    'arc',
-    'arg',
-    'axm',
-    'prx',
-    'prh',
-    'pxc',
-    'pxg',
-    'pxm',
-    'cxx'
-  ],
-  statutIds: ['val'],
-  substances: []
+  statutIds: ['val']
 }
 const apiFetchAndFileCreate = async d => {
   const v = Object.assign(variables, { domaineIds: [d] })
