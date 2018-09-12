@@ -2,7 +2,7 @@
 
 > Flux de données générés quotidiennement à partir de l'API de [Camino](https://camino.beta.gouv.fr).
 
-Application en cours de développement, provisoirement accessible [ici](https://camino.site).
+https://flux.camino.beta.gouv.fr
 
 ---
 
