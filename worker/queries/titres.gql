@@ -1,4 +1,8 @@
-query Titres($domaineIds: [DomaineId!], $statutIds: [StatutId!]) {
+query Titres(
+  $typeIds: [TypeId!]
+  $domaineIds: [DomaineId!]
+  $statutIds: [StatutId!]
+) {
   metas {
     types {
       id
@@ -14,7 +18,7 @@ query Titres($domaineIds: [DomaineId!], $statutIds: [StatutId!]) {
       couleur
     }
   }
-  titres(domaineIds: $domaineIds, statutIds: $statutIds) {
+  titres(typeIds: $typeIds, domaineIds: $domaineIds, statutIds: $statutIds) {
     id
     nom
     type {
@@ -30,6 +34,10 @@ query Titres($domaineIds: [DomaineId!], $statutIds: [StatutId!]) {
       nom
       couleur
     }
+    references {
+      type
+      valeur
+    }
     demarches {
       id
       type {
@@ -41,10 +49,20 @@ query Titres($domaineIds: [DomaineId!], $statutIds: [StatutId!]) {
         nom
         couleur
       }
+      phase {
+        dateDebut
+        dateFin
+        statut {
+          id
+          nom
+          couleur
+        }
+      }
       etapes {
         id
         date
         duree
+        dateDebut
         type {
           id
           nom
