@@ -6,36 +6,33 @@ const titreFormat = t => {
 
   t.demarches &&
     t.demarches.forEach(d => {
+      if (d.phase) {
+        phases.push(d.phase)
+      }
+
       d.etapes &&
         d.etapes.forEach(e => {
           if (
             d.statut.id === 'acc' &&
-            e.type.id === 'dpu' &&
-            e.statut.id === 'ter'
+            (e.type.id === 'dex' || e.type.id === 'dpu') &&
+            (e.statut.id === 'acc' || e.statut.id === 'fai')
           ) {
-            if (
-              d.type.nom === 'octroi' ||
-              d.type.nom === 'prolongation' ||
-              d.type.nom === 'prolongation 1' ||
-              d.type.nom === 'prolongation 2'
-            ) {
-              phases.push({
-                nom: d.type.nom,
-                duree: e.duree,
-                date: e.date
-              })
-            }
-
             if (e.geojsonPoints) {
               perimetres.push(e.geojsonMultiPolygon)
             }
 
-            if (e.substances) {
-              substances.push(...e.substances)
+            if (e.substances && substances.length === 0) {
+              e.substances.forEach(s => {
+                substances.push(s)
+              })
             }
 
-            if (e.titulaires) {
-              titulaires.push(...e.titulaires)
+            if (e.titulaires && titulaires.length === 0) {
+              e.titulaires.forEach(t => {
+                if (!titulaires.find(ti => ti.id === t.id)) {
+                  titulaires.push(t)
+                }
+              })
             }
           }
         })
