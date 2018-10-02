@@ -50,10 +50,7 @@ const titreFormat = t => {
       titulaires,
       phases
     },
-    geometry: {
-      type: 'MultiPolygon',
-      coordinates: perimetres[0].geometry.coordinates
-    }
+    geometry: perimetres[0] && perimetres[0].geometry
   }
 }
 
