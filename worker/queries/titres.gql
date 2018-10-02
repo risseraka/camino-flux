@@ -2,6 +2,8 @@ query Titres(
   $typeIds: [TypeId!]
   $domaineIds: [DomaineId!]
   $statutIds: [StatutId!]
+  $substances: [String!]
+  $noms: [String!]
 ) {
   metas {
     types {
@@ -18,7 +20,13 @@ query Titres(
       couleur
     }
   }
-  titres(typeIds: $typeIds, domaineIds: $domaineIds, statutIds: $statutIds) {
+  titres(
+    typeIds: $typeIds
+    domaineIds: $domaineIds
+    statutIds: $statutIds
+    substances: $substances
+    noms: $noms
+  ) {
     id
     nom
     type {
@@ -40,6 +48,7 @@ query Titres(
     }
     demarches {
       id
+      ordre
       type {
         id
         nom
@@ -60,9 +69,16 @@ query Titres(
       }
       etapes {
         id
+        ordre
         date
         duree
-        dateDebut
+        surface
+        volume
+        volumeUnite
+        visas
+        engagement
+        engagementDevise
+        sourceIndisponible
         type {
           id
           nom
@@ -76,14 +92,14 @@ query Titres(
           id
           nom
         }
+        administrations {
+          ...administration
+        }
         titulaires {
           ...entreprise
         }
         amodiataires {
           ...entreprise
-        }
-        utilisateurs {
-          ...utilisateur
         }
         geojsonPoints {
           ...geojsonPoints
@@ -94,34 +110,70 @@ query Titres(
         substances {
           ...substance
         }
+        documents {
+          ...document
+        }
       }
     }
   }
 }
 
-fragment utilisateur on Utilisateur {
-  id
-  nom
-  prenom
-  email
-  telephoneMobile
-  telephoneFixe
-  administrationId
-  entrepriseId
-}
-
-fragment entreprise on Entreprise {
+fragment administration on Administration {
   id
   nom
   service
-  site
-  email
-  telephone
   adresse1
   adresse2
   codePostal
   ville
   cedex
+  url
+  telephone
+  email
+  utilisateurs {
+    ...utilisateur
+  }
+}
+
+fragment entreprise on Entreprise {
+  id
+  nom
+  raisonSociale
+  paysId
+  legalSiren
+  legalEtranger
+  legalForme
+  voieNumero
+  voieType
+  voieNom
+  adresseComplement
+  codePostal
+  ville
+  cedex
+  url
+  telephone
+  email
+  utilisateurs {
+    ...utilisateur
+  }
+}
+
+fragment utilisateur on Utilisateur {
+  id
+  email
+  nom
+  prenom
+  telephoneMobile
+  telephoneFixe
+  entrepriseId
+  groupes {
+    ...groupe
+  }
+}
+
+fragment groupe on Groupe {
+  id
+  nom
 }
 
 fragment geojsonMultiPolygon on GeojsonMultiPolygon {
@@ -166,4 +218,15 @@ fragment substance on TitreSubstance {
       lien
     }
   }
+}
+
+fragment document on Document {
+  id
+  nom
+  type
+  url
+  uri
+  fichier
+  jorf
+  nor
 }
