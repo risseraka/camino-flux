@@ -52,7 +52,7 @@ const titreFormat = t => {
     },
     geometry: {
       type: 'MultiPolygon',
-      coordinates: perimetres[0]
+      coordinates: perimetres[0].geometry.coordinates
     }
   }
 }
