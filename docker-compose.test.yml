@@ -4,9 +4,9 @@ services:
   flux:
     build: .
     environment:
-      VIRTUAL_HOST: flux.camino.pw
+      VIRTUAL_HOST: test.flux.camino.pw
       VIRTUAL_PORT: ${NODE_PORT}
-      LETSENCRYPT_HOST: flux.camino.pw
+      LETSENCRYPT_HOST: test.flux.camino.pw
       LETSENCRYPT_EMAIL: francoisromain@gmail.com
       NODE_PORT: ${NODE_PORT}
     expose:
