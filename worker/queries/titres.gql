@@ -148,7 +148,7 @@ fragment substance on TitreSubstance {
   connexe
   gerep
   description
-  legal {
+  legales {
     nom
   }
 }

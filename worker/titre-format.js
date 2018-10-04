@@ -1,24 +1,25 @@
 const titreFormat = t => {
-  const dates = t.demarches.reduce(
-    (d, titreDemarche) => {
-      if (titreDemarche.phase) {
-        console.log(titreDemarche.phase)
+  const titreDemarchesPhases = t.demarches.filter(td => td.phase)
+
+  const dateDebut =
+    (titreDemarchesPhases.length && titreDemarchesPhases[0].phase.dateDebut) ||
+    null
+  const dateFin =
+    (titreDemarchesPhases.length &&
+      titreDemarchesPhases[titreDemarchesPhases.length - 1].phase.dateFin) ||
+    null
+  const dateDemande = t.demarches
+    .filter(td => td.type.id === 'oct')
+    .reduce((date, td) => {
+      if (!date) {
+        const etapesMens =
+          td.etapes && td.etapes.filter(te => te.type.id === 'men')
+
+        date = etapesMens.length ? etapesMens[0].date : null
       }
 
-      titreDemarche.etapes &&
-        titreDemarche.etapes.forEach(e => {
-          if (
-            titreDemarche.statut.id === 'acc' &&
-            (e.type.id === 'dex' || e.type.id === 'dpu') &&
-            (e.statut.id === 'acc' || e.statut.id === 'fai')
-          ) {
-          }
-        })
-
-      return d
-    },
-    { debut: null, fin: null, demande: null }
-  )
+      return date
+    }, null)
 
   return {
     type: 'Feature',
@@ -32,7 +33,7 @@ const titreFormat = t => {
         (t.substances &&
           t.substances.length &&
           t.substances
-            .map(s => s.legal.map(sl => sl.nom).join(', '))
+            .map(s => s.legales.map(sl => sl.nom).join(', '))
             .join(', ')) ||
         null,
       titulaires:
@@ -50,9 +51,9 @@ const titreFormat = t => {
       references:
         t.references &&
         t.references.map(r => `${r.type}: ${r.valeur}`).join(', '),
-      date_debut: dates.debut,
-      date_fin: dates.fin,
-      date_demande: dates.demande,
+      date_debut: dateDebut,
+      date_fin: dateFin,
+      date_demande: dateDemande,
       url: `https://camino.beta.gouv.fr/titres/${t.id}`
     },
     geometry: t.geojsonMultiPolygon && t.geojsonMultiPolygon.geometry
