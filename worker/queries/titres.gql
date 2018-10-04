@@ -6,19 +6,7 @@ query Titres(
   $noms: [String!]
 ) {
   metas {
-    types {
-      id
-      nom
-    }
-    domaines {
-      id
-      nom
-    }
-    statuts {
-      id
-      nom
-      couleur
-    }
+    ...meta
   }
   titres(
     typeIds: $typeIds
@@ -27,153 +15,113 @@ query Titres(
     substances: $substances
     noms: $noms
   ) {
+    ...titre
+  }
+}
+
+fragment meta on Metas {
+  types {
     id
     nom
-    type {
-      id
-      nom
-    }
-    domaine {
-      id
-      nom
-    }
+  }
+  domaines {
+    id
+    nom
+  }
+  statuts {
+    id
+    nom
+    couleur
+  }
+}
+
+fragment titre on Titre {
+  id
+  nom
+  type {
+    id
+    nom
+  }
+  domaine {
+    id
+    nom
+  }
+  statut {
+    id
+    nom
+  }
+  references {
+    type
+    valeur
+  }
+  substances {
+    ...substance
+  }
+  administrations {
+    ...administration
+  }
+  titulaires {
+    ...entreprise
+  }
+  amodiataires {
+    ...entreprise
+  }
+  geojsonPoints {
+    ...geojsonPoints
+  }
+  geojsonMultiPolygon {
+    ...geojsonMultiPolygon
+  }
+  demarches {
+    ...demarche
+  }
+}
+
+fragment demarche on Demarche {
+  id
+  ordre
+  type {
+    id
+    nom
+  }
+  statut {
+    id
+    nom
+  }
+  phase {
+    dateDebut
+    dateFin
     statut {
       id
       nom
-      couleur
     }
-    references {
-      type
-      valeur
-    }
-    demarches {
-      id
-      ordre
-      type {
-        id
-        nom
-      }
-      statut {
-        id
-        nom
-        couleur
-      }
-      phase {
-        dateDebut
-        dateFin
-        statut {
-          id
-          nom
-          couleur
-        }
-      }
-      etapes {
-        id
-        ordre
-        date
-        duree
-        surface
-        volume
-        volumeUnite
-        visas
-        engagement
-        engagementDevise
-        sourceIndisponible
-        type {
-          id
-          nom
-        }
-        statut {
-          id
-          nom
-          couleur
-        }
-        emprise {
-          id
-          nom
-        }
-        administrations {
-          ...administration
-        }
-        titulaires {
-          ...entreprise
-        }
-        amodiataires {
-          ...entreprise
-        }
-        geojsonPoints {
-          ...geojsonPoints
-        }
-        geojsonMultiPolygon {
-          ...geojsonMultiPolygon
-        }
-        substances {
-          ...substance
-        }
-        documents {
-          ...document
-        }
-      }
-    }
+  }
+  etapes {
+    ...etape
+  }
+}
+
+fragment etape on Etape {
+  ordre
+  date
+  type {
+    id
+    nom
+  }
+  statut {
+    id
+    nom
   }
 }
 
 fragment administration on Administration {
-  id
   nom
-  service
-  adresse1
-  adresse2
-  codePostal
-  ville
-  cedex
-  url
-  telephone
-  email
-  utilisateurs {
-    ...utilisateur
-  }
 }
 
 fragment entreprise on Entreprise {
-  id
   nom
-  raisonSociale
-  paysId
   legalSiren
   legalEtranger
-  legalForme
-  voieNumero
-  voieType
-  voieNom
-  adresseComplement
-  codePostal
-  ville
-  cedex
-  url
-  telephone
-  email
-  utilisateurs {
-    ...utilisateur
-  }
-}
-
-fragment utilisateur on Utilisateur {
-  id
-  email
-  nom
-  prenom
-  telephoneMobile
-  telephoneFixe
-  entrepriseId
-  groupes {
-    ...groupe
-  }
-}
-
-fragment groupe on Groupe {
-  id
-  nom
 }
 
 fragment geojsonMultiPolygon on GeojsonMultiPolygon {
@@ -196,37 +144,11 @@ fragment geojsonPoints on GeojsonPoints {
 }
 
 fragment substance on TitreSubstance {
-  id
   nom
   connexe
-  ordre
-  symbole
   gerep
   description
   legal {
-    id
     nom
-    description
-    domaine {
-      id
-      nom
-    }
-    code {
-      id
-      nom
-      description
-      lien
-    }
   }
-}
-
-fragment document on Document {
-  id
-  nom
-  type
-  url
-  uri
-  fichier
-  jorf
-  nor
 }

@@ -1,56 +1,61 @@
 const titreFormat = t => {
-  const perimetres = []
-  const substances = []
-  const titulaires = []
-  const phases = []
-
-  t.demarches &&
-    t.demarches.forEach(d => {
-      if (d.phase) {
-        phases.push(d.phase)
+  const dates = t.demarches.reduce(
+    (d, titreDemarche) => {
+      if (titreDemarche.phase) {
+        console.log(titreDemarche.phase)
       }
 
-      d.etapes &&
-        d.etapes.forEach(e => {
+      titreDemarche.etapes &&
+        titreDemarche.etapes.forEach(e => {
           if (
-            d.statut.id === 'acc' &&
+            titreDemarche.statut.id === 'acc' &&
             (e.type.id === 'dex' || e.type.id === 'dpu') &&
             (e.statut.id === 'acc' || e.statut.id === 'fai')
           ) {
-            if (e.geojsonPoints) {
-              perimetres.push(e.geojsonMultiPolygon)
-            }
-
-            if (e.substances && substances.length === 0) {
-              e.substances.forEach(s => {
-                substances.push(s)
-              })
-            }
-
-            if (e.titulaires && titulaires.length === 0) {
-              e.titulaires.forEach(t => {
-                if (!titulaires.find(ti => ti.id === t.id)) {
-                  titulaires.push(t)
-                }
-              })
-            }
           }
         })
-    })
+
+      return d
+    },
+    { debut: null, fin: null, demande: null }
+  )
 
   return {
     type: 'Feature',
     properties: {
       id: t.id,
       nom: t.nom,
-      type: t.type,
-      domaine: t.domaine,
-      statut: t.statut,
-      substances,
-      titulaires,
-      phases
+      type: t.type.nom,
+      domaine: t.domaine.nom,
+      statut: t.statut.nom,
+      substances:
+        (t.substances &&
+          t.substances.length &&
+          t.substances
+            .map(s => s.legal.map(sl => sl.nom).join(', '))
+            .join(', ')) ||
+        null,
+      titulaires:
+        (t.titulaires &&
+          t.titulaires.length &&
+          t.titulaires
+            .map(t => `${t.nom} (${t.legalSiren || t.legalEtranger})`)
+            .join(', ')) ||
+        null,
+      amodiataires:
+        (t.amodiataires &&
+          t.amodiataires.length &&
+          t.amodiataires.map(t => `${t.nom} (${t.siret})`).join(', ')) ||
+        null,
+      references:
+        t.references &&
+        t.references.map(r => `${r.type}: ${r.valeur}`).join(', '),
+      date_debut: dates.debut,
+      date_fin: dates.fin,
+      date_demande: dates.demande,
+      url: `https://camino.beta.gouv.fr/titres/${t.id}`
     },
-    geometry: perimetres[0] && perimetres[0].geometry
+    geometry: t.geojsonMultiPolygon && t.geojsonMultiPolygon.geometry
   }
 }
 
