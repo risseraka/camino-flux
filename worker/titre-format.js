@@ -4,10 +4,12 @@ const titreFormat = t => {
   const dateDebut =
     (titreDemarchesPhases.length && titreDemarchesPhases[0].phase.dateDebut) ||
     null
+
   const dateFin =
     (titreDemarchesPhases.length &&
       titreDemarchesPhases[titreDemarchesPhases.length - 1].phase.dateFin) ||
     null
+
   const dateDemande = t.demarches
     .filter(td => td.type.id === 'oct')
     .reduce((date, td) => {
@@ -29,6 +31,8 @@ const titreFormat = t => {
       type: t.type.nom,
       domaine: t.domaine.nom,
       statut: t.statut.nom,
+      volume: t.volume && `${t.volume} ${t.volumeUnite}`,
+      surface: t.surface && `${t.surface} km²`,
       substances:
         (t.substances &&
           t.substances.length &&
