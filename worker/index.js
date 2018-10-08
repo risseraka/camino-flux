@@ -11,6 +11,17 @@ const apiUrl = process.env.API_URL
 
 const query = fileImport(__dirname, 'queries/titres.gql')
 
+const domainesCouleurs = {
+  m: '#498bd6',
+  h: '#856940',
+  s: '#8468b1',
+  g: '#d16c3e',
+  w: '#3ed1ac',
+  r: '#c2d13e',
+  c: '#3ea3d1',
+  f: '#a8782f'
+}
+
 const apiFetchAndFileFormat = async flux => {
   const res = await apiFetch(apiUrl, query, flux)
   const titres = res.data.titres.map(t => titreFormat(t))
@@ -25,7 +36,8 @@ const apiFetchAndFileFormat = async flux => {
         )
       }),
     {
-      file: fileName
+      file: fileName,
+      couleur: domainesCouleurs[flux.domaineIds[0]]
     }
   )
   const fileContent = titres
@@ -44,7 +56,6 @@ const filesCreate = async () => {
   )
   const infos = await Promise.all([
     ...flux.map(async f => {
-      const infos = Object
       await fileCreate(f.filePath, JSON.stringify(f.fileContent, null, 2))
       return f.infos
     })
