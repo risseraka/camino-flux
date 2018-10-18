@@ -55,7 +55,7 @@ const filesCreate = async () => {
   // - formate un fichier geojson correspondant
   // - élimine du tableau les fichiers pour lesquelles l'API ne renvoit rien
   const flux = await Promise.all([...fluxList.map(apiFetchAndFileFormat)]).then(
-    fx => fx.filter(f => f.fileContent.length > 0)
+    fx => fx.filter(f => f.fileContent.features.length > 0)
   )
 
   // génère un fichier pour chaque élément du tableau ci-dessus
@@ -81,7 +81,10 @@ const filesCreate = async () => {
 // - infos: la description du fichier
 const apiFetchAndFileFormat = async flux => {
   const res = await apiFetch(apiUrl, query, flux)
-  const fileContent = res.data.titres.map(t => titreFormat(t))
+  const fileContent = {
+    type: 'FeatureCollection',
+    features: res.data.titres.map(t => titreFormat(t))
+  }
   const fileName = `titres-${flux.domaineIds.join('-')}-${flux.typeIds.join(
     '-'
   )}-${flux.statutIds.join('-')}.geojson`
