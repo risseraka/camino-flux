@@ -30,21 +30,21 @@ const fluxList = [
     typeIds: ['pxc'],
     statutIds: ['dmi']
   },
-  // {
-  //   domaineIds: ['c'],
-  //   typeIds: ['apx'],
-  //   statutIds: ['ech']
-  // },
-  // {
-  //   domaineIds: ['c'],
-  //   typeIds: ['arc'],
-  //   statutIds: ['ech']
-  // },
-  // {
-  //   domaineIds: ['c'],
-  //   typeIds: ['pxc'],
-  //   statutIds: ['ech']
-  // },
+  {
+    domaineIds: ['c'],
+    typeIds: ['apx'],
+    statutIds: ['ech']
+  },
+  {
+    domaineIds: ['c'],
+    typeIds: ['arc'],
+    statutIds: ['ech']
+  },
+  {
+    domaineIds: ['c'],
+    typeIds: ['pxc'],
+    statutIds: ['ech']
+  },
   // --------------------------------------
   {
     domaineIds: ['f'],
@@ -66,16 +66,16 @@ const fluxList = [
     typeIds: ['prx'],
     statutIds: ['dmi']
   },
-  // {
-  //   domaineIds: ['f'],
-  //   typeIds: ['cxx'],
-  //   statutIds: ['ech']
-  // },
-  // {
-  //   domaineIds: ['f'],
-  //   typeIds: ['prx'],
-  //   statutIds: ['ech']
-  // },
+  {
+    domaineIds: ['f'],
+    typeIds: ['cxx'],
+    statutIds: ['ech']
+  },
+  {
+    domaineIds: ['f'],
+    typeIds: ['prx'],
+    statutIds: ['ech']
+  },
   // --------------------------------------
   {
     domaineIds: ['g'],
@@ -117,26 +117,26 @@ const fluxList = [
     typeIds: ['pxg'],
     statutIds: ['dmi']
   },
-  // {
-  //   domaineIds: ['g'],
-  //   typeIds: ['arg'],
-  //   statutIds: ['ech']
-  // },
-  // {
-  //   domaineIds: ['g'],
-  //   typeIds: ['cxx'],
-  //   statutIds: ['ech']
-  // },
-  // {
-  //   domaineIds: ['g'],
-  //   typeIds: ['prx'],
-  //   statutIds: ['ech']
-  // },
-  // {
-  //   domaineIds: ['g'],
-  //   typeIds: ['pxg'],
-  //   statutIds: ['ech']
-  // },
+  {
+    domaineIds: ['g'],
+    typeIds: ['arg'],
+    statutIds: ['ech']
+  },
+  {
+    domaineIds: ['g'],
+    typeIds: ['cxx'],
+    statutIds: ['ech']
+  },
+  {
+    domaineIds: ['g'],
+    typeIds: ['prx'],
+    statutIds: ['ech']
+  },
+  {
+    domaineIds: ['g'],
+    typeIds: ['pxg'],
+    statutIds: ['ech']
+  },
   // --------------------------------------
   {
     domaineIds: ['h'],
@@ -178,26 +178,26 @@ const fluxList = [
     typeIds: ['pxh'],
     statutIds: ['dmi']
   },
-  // {
-  //   domaineIds: ['h'],
-  //   typeIds: ['apx'],
-  //   statutIds: ['ech']
-  // },
-  // {
-  //   domaineIds: ['h'],
-  //   typeIds: ['cxx'],
-  //   statutIds: ['ech']
-  // },
-  // {
-  //   domaineIds: ['h'],
-  //   typeIds: ['prh'],
-  //   statutIds: ['ech']
-  // },
-  // {
-  //   domaineIds: ['h'],
-  //   typeIds: ['pxh'],
-  //   statutIds: ['ech']
-  // },
+  {
+    domaineIds: ['h'],
+    typeIds: ['apx'],
+    statutIds: ['ech']
+  },
+  {
+    domaineIds: ['h'],
+    typeIds: ['cxx'],
+    statutIds: ['ech']
+  },
+  {
+    domaineIds: ['h'],
+    typeIds: ['prh'],
+    statutIds: ['ech']
+  },
+  {
+    domaineIds: ['h'],
+    typeIds: ['pxh'],
+    statutIds: ['ech']
+  },
   // --------------------------------------
   {
     domaineIds: ['m'],
@@ -249,31 +249,31 @@ const fluxList = [
     typeIds: ['pxm'],
     statutIds: ['dmi']
   },
-  // {
-  //   domaineIds: ['m'],
-  //   typeIds: ['apx'],
-  //   statutIds: ['ech']
-  // },
-  // {
-  //   domaineIds: ['m'],
-  //   typeIds: ['axm'],
-  //   statutIds: ['ech']
-  // },
-  // {
-  //   domaineIds: ['m'],
-  //   typeIds: ['cxx'],
-  //   statutIds: ['ech']
-  // },
-  // {
-  //   domaineIds: ['m'],
-  //   typeIds: ['prx'],
-  //   statutIds: ['ech']
-  // },
-  // {
-  //   domaineIds: ['m'],
-  //   typeIds: ['pxm'],
-  //   statutIds: ['ech']
-  // },
+  {
+    domaineIds: ['m'],
+    typeIds: ['apx'],
+    statutIds: ['ech']
+  },
+  {
+    domaineIds: ['m'],
+    typeIds: ['axm'],
+    statutIds: ['ech']
+  },
+  {
+    domaineIds: ['m'],
+    typeIds: ['cxx'],
+    statutIds: ['ech']
+  },
+  {
+    domaineIds: ['m'],
+    typeIds: ['prx'],
+    statutIds: ['ech']
+  },
+  {
+    domaineIds: ['m'],
+    typeIds: ['pxm'],
+    statutIds: ['ech']
+  },
   // --------------------------------------
   {
     domaineIds: ['s'],
@@ -295,16 +295,16 @@ const fluxList = [
     typeIds: ['prx'],
     statutIds: ['dmi']
   },
-  // {
-  //   domaineIds: ['s'],
-  //   typeIds: ['cxx'],
-  //   statutIds: ['ech']
-  // },
-  // {
-  //   domaineIds: ['s'],
-  //   typeIds: ['prx'],
-  //   statutIds: ['ech']
-  // },
+  {
+    domaineIds: ['s'],
+    typeIds: ['cxx'],
+    statutIds: ['ech']
+  },
+  {
+    domaineIds: ['s'],
+    typeIds: ['prx'],
+    statutIds: ['ech']
+  },
   // --------------------------------------
   {
     domaineIds: ['w'],
@@ -345,27 +345,27 @@ const fluxList = [
     domaineIds: ['w'],
     typeIds: ['arc'],
     statutIds: ['dmi']
+  },
+  {
+    domaineIds: ['w'],
+    typeIds: ['apx'],
+    statutIds: ['ech']
+  },
+  {
+    domaineIds: ['w'],
+    typeIds: ['cxx'],
+    statutIds: ['ech']
+  },
+  {
+    domaineIds: ['w'],
+    typeIds: ['prx'],
+    statutIds: ['ech']
+  },
+  {
+    domaineIds: ['w'],
+    typeIds: ['arc'],
+    statutIds: ['ech']
   }
-  // {
-  //   domaineIds: ['w'],
-  //   typeIds: ['apx'],
-  //   statutIds: ['ech']
-  // },
-  // {
-  //   domaineIds: ['w'],
-  //   typeIds: ['cxx'],
-  //   statutIds: ['ech']
-  // },
-  // {
-  //   domaineIds: ['w'],
-  //   typeIds: ['prx'],
-  //   statutIds: ['ech']
-  // },
-  // {
-  //   domaineIds: ['w'],
-  //   typeIds: ['arc'],
-  //   statutIds: ['ech']
-  // }
 ]
 
 module.exports = fluxList
