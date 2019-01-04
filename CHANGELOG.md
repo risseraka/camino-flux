@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.3.0"></a>
+# [0.3.0](https://github.com/MTES-MCT/camino-flux/compare/v0.2.0...v0.3.0) (2019-01-04)
+
+
+### Features
+
+* ajoute le contenu du fichier readme.txt ([94844ef](https://github.com/MTES-MCT/camino-flux/commit/94844ef))
+
+
+
 <a name="0.2.0"></a>
 # 0.2.0 (2019-01-04)
 
