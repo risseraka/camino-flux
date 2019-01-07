@@ -1,14 +1,30 @@
+---
+
 Flux géographiques Camino
 
 ---
 
-Les flux d’informations géographiques de Camino permettent de publier les informations administratives et géographiques relatives aux titres miniers valides et demandes initiales ou modificatives afférentes publiques et en cours d'instruction. Ces informations sont également disponibles pour les autorisations d’exploitation en Guyane.
+Support technique
 
-Le format “Geojson” de publication des données est un format ouvert et réutilisable qui permet notamment l’utilisation de ces données par des services tiers ou des logiciels de visualisation ou gestion d’information géographique.
+Téléphone : +33 (0)1 40 81 95 86
+Email : camino@beta.gouv.fr
+Github: https://github.com/MTES-MCT/camino-flux
 
-Ces flux sont mis à jour chaque matin
+---
 
-Ce mode de diffusion des données de Camino est basé sur les services de l’API qui offre des possibilités de requêtes avancées plus souples et complètes. L’API est disponible sur http://api.camino.beta.gouv.fr. 
+Les flux géographiques Camino exposent les informations administratives et géographiques pour : 
+- les titres miniers valides et demandes initiales ou modificatives afférentes publiques et en cours d'instruction. 
+- les autorisations d’exploitation en Guyane.
+
+Les données sont publiées au format Geojson. C'est un format ouvert et réutilisable qui permet notamment l’utilisation de ces données par des services tiers ou des logiciels de visualisation ou gestion d’information géographique.
+
+Ces flux sont mis à jour quotidiennement.
+
+Ces flux sont générés via les services de l’API Camino. 
+
+Le code source qui sert à générer les flux est disponible ici: https://github.com/MTES-MCT/camino-flux.
+
+L'API, qui offre des possibilités de requêtes avancées plus souples et complètes, est disponible sur http://api.camino.beta.gouv.fr. 
 
 ---
 
