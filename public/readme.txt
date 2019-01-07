@@ -8,7 +8,7 @@ Support technique
 
 Téléphone : +33 (0)1 40 81 95 86
 Email : camino@beta.gouv.fr
-Github: https://github.com/MTES-MCT/camino-flux
+Github : https://github.com/MTES-MCT/camino-flux
 
 ---
 
@@ -22,7 +22,7 @@ Ces flux sont mis à jour quotidiennement.
 
 Ces flux sont générés via les services de l’API Camino. 
 
-Le code source qui sert à générer les flux est disponible ici: https://github.com/MTES-MCT/camino-flux.
+Le code source qui sert à générer les flux est disponible ici : https://github.com/MTES-MCT/camino-flux.
 
 L'API, qui offre des possibilités de requêtes avancées plus souples et complètes, est disponible sur http://api.camino.beta.gouv.fr. 
 
@@ -50,11 +50,11 @@ Informations disponibles dans les flux géographiques Camino
 > Informations administratives
 
     "properties": {
-        "id": "id du titres dans Camino sous la forme : idDuDomaineMinier-idDuTypeDeTitre-NomDuTitre-AnnéeDeDemandeOuDOctroi",
-        "nom": "Nom du Titre",
+        "id": "id du titres dans Camino sous la forme : id_du_domaine_minier-id_du_type_de_titre-nom_du_titre-année_de_demande_ou_d_octroi",
+        "nom": "nom du titre",
         "type": "type de titre",
         "domaine": "type de domaine minier",
-        "statut": "Statut du titre [demande initiale / valide / modification en instance",
+        "statut": "statut du titre [demande initiale / valide / modification en instance",
         "volume": “volume si applicable”,
         "surface": “surface légale indiquée dans l’acte”,
         "substances": “liste des substances légales”,
