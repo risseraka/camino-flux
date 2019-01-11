@@ -2,7 +2,6 @@
 version: "3"
 
 services:
-
   flux:
     build: .
     environment:
@@ -10,6 +9,7 @@ services:
       VIRTUAL_HOST: flux.camino.local
       VIRTUAL_PORT: ${NODE_PORT}
       NODE_PORT: ${NODE_PORT}
+      HTTPS_METHOD: noredirect
     expose:
       - ${NODE_PORT}
 
