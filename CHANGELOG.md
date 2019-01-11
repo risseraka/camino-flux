@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.5.0"></a>
+# [0.5.0](https://github.com/MTES-MCT/camino-flux/compare/v0.4.0...v0.5.0) (2019-01-11)
+
+
+### Bug Fixes
+
+* typo ([b7eb11b](https://github.com/MTES-MCT/camino-flux/commit/b7eb11b))
+
+
+### Features
+
+* **docker:** ne force pas la redirection vers https ([b7ca060](https://github.com/MTES-MCT/camino-flux/commit/b7ca060))
+* **readme:** ajoute les coordonnées du support technique ([1026506](https://github.com/MTES-MCT/camino-flux/commit/1026506))
+
+
+
 <a name="0.4.0"></a>
 # [0.4.0](https://github.com/MTES-MCT/camino-flux/compare/v0.3.0...v0.4.0) (2019-01-07)
 
