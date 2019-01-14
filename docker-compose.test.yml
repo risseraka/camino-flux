@@ -6,10 +6,7 @@ services:
     environment:
       VIRTUAL_HOST: test.flux.camino.beta.gouv.fr
       VIRTUAL_PORT: ${NODE_PORT}
-      LETSENCRYPT_HOST: test.flux.camino.beta.gouv.fr
-      LETSENCRYPT_EMAIL: francoisromain@gmail.com
       NODE_PORT: ${NODE_PORT}
-      HTTPS_METHOD: noredirect
     expose:
       - ${NODE_PORT}
 
