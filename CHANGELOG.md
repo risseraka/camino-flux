@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.6.0"></a>
+# [0.6.0](https://github.com/MTES-MCT/camino-flux/compare/v0.5.0...v0.6.0) (2019-01-18)
+
+
+### Features
+
+* supprime le https ([81ee360](https://github.com/MTES-MCT/camino-flux/commit/81ee360))
+
+
+### Reverts
+
+* **https:** remet le hhtps ([b442167](https://github.com/MTES-MCT/camino-flux/commit/b442167))
+
+
+
 <a name="0.5.0"></a>
 # [0.5.0](https://github.com/MTES-MCT/camino-flux/compare/v0.4.0...v0.5.0) (2019-01-11)
 

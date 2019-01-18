@@ -1,6 +1,6 @@
 {
   "name": "camino-flux",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Flux géographiques de Camino, le cadastre minier numérique ouvert",
   "main": "index.js",
   "scripts": {
