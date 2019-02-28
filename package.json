@@ -2,6 +2,11 @@
   "name": "camino-flux",
   "version": "0.6.2",
   "description": "Flux géographiques de Camino, le cadastre minier numérique ouvert",
+  "license": "AGPL-3.0-or-later",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MTES-MCT/camino-ui"
+  },
   "main": "index.js",
   "scripts": {
     "build": "node ./worker/index.js",
@@ -10,8 +15,11 @@
     "commit": "npx git-cz",
     "release": "standard-version && git push --follow-tags origin master && conventional-github-releaser"
   },
-  "author": "",
-  "license": "ISC",
+  "author": {
+    "name": "François Romain",
+    "email": "francoisromain@gmail.com",
+    "url": "https://francoisromain.com"
+  },
   "dependencies": {
     "compression": "^1.7.3",
     "dateformat": "^3.0.3",
