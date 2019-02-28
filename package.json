@@ -41,5 +41,22 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true
+  },
+  "eslintConfig": {
+    "extends": [
+      "standard",
+      "prettier",
+      "prettier/standard"
+    ],
+    "env": {
+      "node": true
+    },
+    "rules": {
+      "no-throw-literal": 0
+    }
   }
 }
