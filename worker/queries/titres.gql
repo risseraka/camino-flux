@@ -56,7 +56,9 @@ fragment titre on Titre {
   }
   volume
   surface
-  volumeUnite
+  volumeUnite {
+    nom
+  }
   substances {
     ...substance
   }
