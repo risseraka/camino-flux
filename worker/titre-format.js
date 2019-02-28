@@ -1,5 +1,22 @@
-const titreFormat = t => {
-  const titreDemarchesPhases = t.demarches.filter(td => td.phase)
+const dateFormat = require('dateformat')
+
+const titreFormat = ({
+  id,
+  nom,
+  type,
+  domaine,
+  statut,
+  volume,
+  volumeUnite,
+  surface,
+  substances,
+  titulaires,
+  amodiataires,
+  references,
+  demarches,
+  geojsonMultiPolygon
+}) => {
+  const titreDemarchesPhases = demarches.filter(td => td.phase)
 
   const dateDebut =
     (titreDemarchesPhases.length && titreDemarchesPhases[0].phase.dateDebut) ||
@@ -10,7 +27,7 @@ const titreFormat = t => {
       titreDemarchesPhases[titreDemarchesPhases.length - 1].phase.dateFin) ||
     null
 
-  const dateDemande = t.demarches
+  const dateDemande = demarches
     .filter(td => td.type.id === 'oct')
     .reduce((date, td) => {
       if (!date) {
@@ -26,41 +43,42 @@ const titreFormat = t => {
   return {
     type: 'Feature',
     properties: {
-      id: t.id,
-      nom: t.nom,
-      type: t.type.nom,
-      domaine: t.domaine.nom,
-      statut: t.statut.nom,
-      volume: t.volume && `${t.volume} ${t.volumeUnite}`,
-      surface: t.surface && `${t.surface} km²`,
+      id: id,
+      nom: nom,
+      type: type.nom,
+      domaine: domaine.nom,
+      statut: statut.nom,
+      volume: volume && `${volume} ${volumeUnite.nom}`,
+      surface: surface && `${surface} km²`,
       substances:
-        (t.substances &&
-          t.substances.length &&
-          t.substances
+        (substances &&
+          substances.length &&
+          substances
             .map(s => s.legales.map(sl => sl.nom).join(', '))
             .join(', ')) ||
         null,
       titulaires:
-        (t.titulaires &&
-          t.titulaires.length &&
-          t.titulaires
+        (titulaires &&
+          titulaires.length &&
+          titulaires
             .map(t => `${t.nom} (${t.legalSiren || t.legalEtranger})`)
             .join(', ')) ||
         null,
       amodiataires:
-        (t.amodiataires &&
-          t.amodiataires.length &&
-          t.amodiataires.map(t => `${t.nom} (${t.siret})`).join(', ')) ||
+        (amodiataires &&
+          amodiataires.length &&
+          amodiataires
+            .map(t => `${t.nom} (${t.legalSiren || t.legalEtranger})`)
+            .join(', ')) ||
         null,
       references:
-        t.references &&
-        t.references.map(r => `${r.type}: ${r.valeur}`).join(', '),
-      date_debut: dateDebut,
-      date_fin: dateFin,
-      date_demande: dateDemande,
-      url: `https://camino.beta.gouv.fr/titres/${t.id}`
+        references && references.map(r => `${r.type}: ${r.valeur}`).join(', '),
+      date_debut: dateFormat(dateDebut, 'yyyy-mm-dd'),
+      date_fin: dateFormat(dateFin, 'yyyy-mm-dd'),
+      date_demande: dateFormat(dateDemande, 'yyyy-mm-dd'),
+      url: `https://camino.beta.gouv.fr/titres/${id}`
     },
-    geometry: t.geojsonMultiPolygon && t.geojsonMultiPolygon.geometry
+    geometry: geojsonMultiPolygon && geojsonMultiPolygon.geometry
   }
 }
 

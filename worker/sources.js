@@ -1,4 +1,4 @@
-const fluxList = [
+const sources = [
   // --------------------------------------
   {
     domaineIds: ['c'],
@@ -368,4 +368,4 @@ const fluxList = [
   }
 ]
 
-module.exports = fluxList
+module.exports = sources
