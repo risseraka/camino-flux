@@ -1,8 +1,6 @@
 # Camino flux
 
-> Flux de données générés quotidiennement à partir de l'API de [Camino](https://camino.beta.gouv.fr).
-
-https://flux.camino.beta.gouv.fr
+> Flux de données générés quotidiennement à partir de l'API de [Camino](https://camino.beta.gouv.fr): [flux.camino.beta.gouv.fr](https://flux.camino.beta.gouv.fr)
 
 ---
 
