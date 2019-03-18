@@ -124,7 +124,9 @@ fragment administration on Administration {
 }
 
 fragment entreprise on Entreprise {
-  nom
+  etablissements {
+    nom
+  }
   legalSiren
   legalEtranger
 }

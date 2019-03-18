@@ -71,7 +71,7 @@ const datasFormat = async datas =>
   Promise.all([
     ...datas
       // - élimine du tableau les fichiers pour lesquelles l'API ne renvoi rien
-      .filter(({ res }) => res.data.titres.length)
+      .filter(({ res }) => res && res.data && res.data.titres.length)
       .map(async ({ res, params }) => fileFormat({ res, params }))
   ])
 
