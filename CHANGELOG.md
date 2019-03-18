@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [0.7.0](https://github.com/MTES-MCT/camino-ui/compare/v0.6.2...v0.7.0) (2019-03-18)
+
+
+### Features
+
+* **api:** ajoute le champs entreprise.etablissements dans le schema graphQL ([d861028](https://github.com/MTES-MCT/camino-ui/commit/d861028))
+
+
+
 ## [0.6.2](https://github.com/MTES-MCT/camino-flux/compare/v0.6.1...v0.6.2) (2019-02-28)
 
 
