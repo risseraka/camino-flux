@@ -13,7 +13,7 @@
     "dev": "onchange '**/*.js' -i -- npm run build",
     "start": "npm run build && node ./index.js",
     "commit": "npx git-cz",
-    "release": "standard-version && git push --follow-tags origin master && conventional-github-releaser"
+    "release": "standard-version && git push --follow-tags origin master && npx conventional-github-releaser"
   },
   "author": {
     "name": "François Romain",
@@ -34,6 +34,7 @@
     "@types/node": "^11.11.3",
     "@types/node-fetch": "^2.1.6",
     "commitizen": "^3.0.7",
+    "conventional-github-releaser": "^3.1.2",
     "cz-conventional-changelog": "^2.1.0",
     "eslint": "^5.15.3",
     "eslint-config-prettier": "^4.1.0",
