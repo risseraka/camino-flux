@@ -3,6 +3,7 @@
 // - un fichier d'infos contenant la liste des fichier geojson générés
 
 require('dotenv').config()
+const path = require('path')
 const fileImport = require('./_utils/file-import')
 const fileCreate = require('./_utils/file-create')
 const directoryDelete = require('./_utils/directory-delete')
@@ -32,18 +33,18 @@ const domainesCouleurs = {
 
 const run = async () => {
   // efface et recréé le dossier cible
-  await directoryDelete(`${__dirname}/../public/geojson/`)
-  await directoryCreate(`${__dirname}/../public/geojson/`)
+  await directoryDelete(path.join(__dirname, '../public/geojson/'))
+  await directoryCreate(path.join(__dirname, '../public/geojson/'))
 
   // interroge l'API et construit un tableau de réponses
   const datas = await datasGet(sources)
 
   // formate les datas
-  const formatedDatas = await datasFormat(datas)
+  const datasFormated = datasFormat(datas)
 
   // génère un fichier par élément
   // retourne la liste des fichiers générés
-  const infos = await filesCreate(formatedDatas)
+  const infos = await filesCreate(datasFormated)
 
   // créé le fichier récapitulatif infos.json
   await infosFileCreate(infos)
@@ -60,33 +61,36 @@ run()
 // ------------------------------------
 
 const datasGet = async flux =>
-  Promise.all([
-    ...flux.map(async params => ({
+  Promise.all(
+    flux.map(async params => ({
       res: await apiFetch(apiUrl, query, params),
       params
     }))
-  ])
+  )
 
-const datasFormat = async datas =>
-  Promise.all([
-    ...datas
-      // - élimine du tableau les fichiers pour lesquelles l'API ne renvoi rien
-      .filter(({ res }) => res && res.data && res.data.titres.length)
-      .map(async ({ res, params }) => fileFormat({ res, params }))
-  ])
+const datasFormat = datas =>
+  datas
+    // - élimine du tableau les fichiers pour lesquelles l'API ne renvoi rien
+    .reduce(
+      (acc, { res, params }) =>
+        res && res.data && res.data.titres.length
+          ? [...acc, fileFormat({ res, params })]
+          : acc,
+      []
+    )
 
 const filesCreate = async datas =>
-  Promise.all([
-    ...datas.map(async ({ properties, filePath, fileContent }) => {
+  Promise.all(
+    datas.map(async ({ properties, filePath, fileContent }) => {
       await fileCreate(filePath, JSON.stringify(fileContent, null, 2))
       return properties
     })
-  ])
+  )
 
 // génère un fichier infos contenant la liste des fichiers de flux
 const infosFileCreate = async infos => {
   try {
-    const infosFilePath = `${__dirname}/../public/geojson/infos.json`
+    const infosFilePath = path.join(__dirname, '../public/geojson/infos.json')
     const infosFileContent = JSON.stringify(infos, null, 2)
     await fileCreate(infosFilePath, infosFileContent)
 
@@ -100,7 +104,7 @@ const infosFileCreate = async infos => {
 // - fileContent: le contenu du fichier geojson formaté
 // - filePath: le chemin et le nom du fichier
 // - infos: la description du fichier
-const fileFormat = async ({ params, res }) => {
+const fileFormat = ({ params, res }) => {
   try {
     const fileName = `titres-${params.domaineIds.join(
       '-'
@@ -132,10 +136,10 @@ const fileFormat = async ({ params, res }) => {
     const fileContent = {
       type: 'FeatureCollection',
       properties,
-      features: res.data.titres.map(t => titreFormat(t))
+      features: res.data.titres.map(titreFormat)
     }
 
-    const filePath = `${__dirname}/../public/geojson/${fileName}`
+    const filePath = path.join(__dirname, '../public/geojson/', fileName)
 
     return {
       fileContent,
