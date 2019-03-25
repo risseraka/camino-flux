@@ -58,12 +58,25 @@ const titreFormat = ({
   geometry: geojsonMultiPolygon && geojsonMultiPolygon.geometry
 })
 
+const entrepriseNameFind = entreprise => {
+  return (
+    // si l'entreprise à un nom
+    entreprise.nom ||
+    // sinon, trouve l'établissement le plus récent
+    entreprise.etablissements.reduce(
+      (res, e) =>
+        res &&
+        dateFormat(res.dateDebut, 'yyyy-mm-dd') >
+          dateFormat(e.dateDebut, 'yyyy-mm-dd')
+          ? res
+          : e,
+      null
+    ).nom
+  )
+}
+
 const entrepriseFormat = e =>
-  `${
-    e.etablissements[0] && e.etablissements[0].nom
-      ? e.etablissements[0].nom
-      : ''
-  } (${e.legalSiren || e.legalEtranger})`
+  `${entrepriseNameFind(e)} (${e.legalSiren || e.legalEtranger})`
 
 const titreDemarchesPhasesFind = demarches => demarches.filter(td => td.phase)
 

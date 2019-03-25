@@ -1,15 +1,15 @@
 const fetch = require('node-fetch')
 
-const apiFetch = async (apiUrl, query, variables) => {
-  const res = await fetch(apiUrl, {
+const apiFetch = async (url, body) => {
+  const params = {
     method: 'post',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: variables
-      ? JSON.stringify({ query, variables })
-      : JSON.stringify({ query })
-  })
+    body
+  }
+
+  const res = await fetch(url, params)
 
   return res.json()
 }

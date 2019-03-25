@@ -107,6 +107,7 @@ fragment administration on Administration {
 fragment entreprise on Entreprise {
   etablissements {
     nom
+    dateDebut
   }
   legalSiren
   legalEtranger

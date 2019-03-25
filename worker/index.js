@@ -42,7 +42,7 @@ const run = async () => {
 
   // parcours les définitions
   // et construit un tableau d'objet qui contiennent:
-  // - geojson: le contenu du fichier geojson formaté
+  // - geojson: le contenu du fichier formaté
   // - path: le chemin du fichier
   const files = await definitions.reduce(async (files, definition) => {
     // récupère les titres
@@ -72,13 +72,13 @@ run()
 // scripts
 // ------------------------------------
 
-const metasGet = async (apiUrl, metasQuery) => {
-  const res = await apiFetch(apiUrl, metasQuery)
+const metasGet = async (url, query) => {
+  const res = await apiFetch(url, JSON.stringify({ query }))
   return res && res.data && res.data.metas
 }
 
-const titresGet = async (apiUrl, titresQuery, definition) => {
-  const res = await apiFetch(apiUrl, titresQuery, definition)
+const titresGet = async (url, query, variables) => {
+  const res = await apiFetch(url, JSON.stringify({ query, variables }))
   return res && res.data && res.data.titres
 }
 
@@ -93,9 +93,9 @@ const filesCreate = async datas =>
 // génère un fichier infos contenant la liste des fichiers de definitions
 const infosFileCreate = async infos => {
   try {
-    const infospath = join(__dirname, '../public/geojson/infos.json')
-    const infoscontent = JSON.stringify(infos, null, 2)
-    await fileCreate(infospath, infoscontent)
+    const path = join(__dirname, '../public/geojson/infos.json')
+    const content = JSON.stringify(infos, null, 2)
+    await fileCreate(path, content)
 
     console.log(`${infos.length} fichiers générés`)
   } catch (err) {
@@ -104,16 +104,11 @@ const infosFileCreate = async infos => {
 }
 
 // pour une definition, retourne:
-// - content: le contenu du fichier geojson formaté
+// - geojson: le contenu du fichier formaté
 // - path: le chemin et le nom du fichier
-// - properties: la description du fichier
 const fileFormat = (titres, definition, metas) => {
   try {
-    const fileName = `titres-${definition.domaineIds.join(
-      '-'
-    )}-${definition.typeIds.join('-')}-${definition.statutIds.join(
-      '-'
-    )}.geojson`
+    const fileName = fileNameFormat(definition)
 
     return {
       geojson: {
@@ -131,6 +126,11 @@ const fileFormat = (titres, definition, metas) => {
     console.log(err)
   }
 }
+
+const fileNameFormat = ({ domaineIds, statutIds, typeIds }) =>
+  `titres-${domaineIds.join('-')}-${typeIds.join('-')}-${statutIds.join(
+    '-'
+  )}.geojson`
 
 // parcourt les metas (types, domaines, statuts)
 // et retourne les properties de chaque fichier
