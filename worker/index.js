@@ -1,20 +1,21 @@
 // efface le dossier /public/geojson et le recréé avec
-// - un fichier geojson par flux présent dans le fichier fluxList
+// - un fichier geojson par definition présent dans le fichier definitions
 // - un fichier d'infos contenant la liste des fichier geojson générés
 
 require('dotenv').config()
-const path = require('path')
+const { join } = require('path')
 const fileImport = require('./_utils/file-import')
 const fileCreate = require('./_utils/file-create')
 const directoryDelete = require('./_utils/directory-delete')
 const directoryCreate = require('./_utils/directory-create')
 const apiFetch = require('./_utils/api-fetch')
 const titreFormat = require('./titre-format')
-const sources = require('./sources')
+const definitions = require('./definitions')
 
 const apiUrl = process.env.API_URL
 
-const query = fileImport(__dirname, 'queries/titres.gql')
+const titresQuery = fileImport(__dirname, 'queries/titres.gql')
+const metasQuery = fileImport(__dirname, 'queries/metas.gql')
 
 const domainesCouleurs = {
   m: '#498bd6',
@@ -33,24 +34,35 @@ const domainesCouleurs = {
 
 const run = async () => {
   // efface et recréé le dossier cible
-  await directoryDelete(path.join(__dirname, '../public/geojson/'))
-  await directoryCreate(path.join(__dirname, '../public/geojson/'))
+  await directoryDelete(join(__dirname, '../public/geojson/'))
+  await directoryCreate(join(__dirname, '../public/geojson/'))
 
-  // interroge l'API et construit un tableau de réponses
-  const datas = await datasGet(sources)
+  // récupère les metas
+  const metas = await metasGet(apiUrl, metasQuery)
 
-  // formate les datas
-  const datasFormated = datasFormat(datas)
+  // parcours les définitions
+  // et construit un tableau d'objet qui contiennent:
+  // - geojson: le contenu du fichier geojson formaté
+  // - path: le chemin du fichier
+  const files = await definitions.reduce(async (files, definition) => {
+    // récupère les titres
+    const titres = await titresGet(apiUrl, titresQuery, definition)
+    // si la réponse contient des titres
+    return titres && titres.length
+      ? // formate les données et les ajoute à files
+        [...(await files), fileFormat(titres, definition, metas)]
+      : files
+  }, Promise.resolve([]))
 
   // génère un fichier par élément
   // retourne la liste des fichiers générés
-  const infos = await filesCreate(datasFormated)
+  const infos = await filesCreate(files)
 
   // créé le fichier récapitulatif infos.json
   await infosFileCreate(infos)
 
   // génère les fichiers
-  // await filesCreate(flux)
+  // await filesCreate(definitions)
   process.exit()
 }
 
@@ -60,39 +72,30 @@ run()
 // scripts
 // ------------------------------------
 
-const datasGet = async flux =>
-  Promise.all(
-    flux.map(async params => ({
-      res: await apiFetch(apiUrl, query, params),
-      params
-    }))
-  )
+const metasGet = async (apiUrl, metasQuery) => {
+  const res = await apiFetch(apiUrl, metasQuery)
+  return res && res.data && res.data.metas
+}
 
-const datasFormat = datas =>
-  datas
-    // - élimine du tableau les fichiers pour lesquelles l'API ne renvoi rien
-    .reduce(
-      (acc, { res, params }) =>
-        res && res.data && res.data.titres.length
-          ? [...acc, fileFormat({ res, params })]
-          : acc,
-      []
-    )
+const titresGet = async (apiUrl, titresQuery, definition) => {
+  const res = await apiFetch(apiUrl, titresQuery, definition)
+  return res && res.data && res.data.titres
+}
 
 const filesCreate = async datas =>
   Promise.all(
-    datas.map(async ({ properties, filePath, fileContent }) => {
-      await fileCreate(filePath, JSON.stringify(fileContent, null, 2))
-      return properties
+    datas.map(async ({ path, geojson }) => {
+      await fileCreate(path, JSON.stringify(geojson, null, 2))
+      return geojson.properties
     })
   )
 
-// génère un fichier infos contenant la liste des fichiers de flux
+// génère un fichier infos contenant la liste des fichiers de definitions
 const infosFileCreate = async infos => {
   try {
-    const infosFilePath = path.join(__dirname, '../public/geojson/infos.json')
-    const infosFileContent = JSON.stringify(infos, null, 2)
-    await fileCreate(infosFilePath, infosFileContent)
+    const infospath = join(__dirname, '../public/geojson/infos.json')
+    const infoscontent = JSON.stringify(infos, null, 2)
+    await fileCreate(infospath, infoscontent)
 
     console.log(`${infos.length} fichiers générés`)
   } catch (err) {
@@ -100,53 +103,52 @@ const infosFileCreate = async infos => {
   }
 }
 
-// pour un flux, retourne:
-// - fileContent: le contenu du fichier geojson formaté
-// - filePath: le chemin et le nom du fichier
-// - infos: la description du fichier
-const fileFormat = ({ params, res }) => {
+// pour une definition, retourne:
+// - content: le contenu du fichier geojson formaté
+// - path: le chemin et le nom du fichier
+// - properties: la description du fichier
+const fileFormat = (titres, definition, metas) => {
   try {
-    const fileName = `titres-${params.domaineIds.join(
+    const fileName = `titres-${definition.domaineIds.join(
       '-'
-    )}-${params.typeIds.join('-')}-${params.statutIds.join('-')}.geojson`
-
-    // retourne les infos de chaque fichier
-    // - fichier (nom)
-    // - couleur (associée au domaine)
-    // - types []
-    // - domaines []
-    // - statuts []
-    // parcourt les metas (types, domaines, statuts)
-    const properties = Object.keys(res.data.metas).reduce(
-      (i, metaName) =>
-        Object.assign(i, {
-          // à chaque meta on associe un tableau
-          // qui contient les noms associés aux ids renseignées dans paramsList
-          [metaName]: params[`${metaName.slice(0, -1)}Ids`].map(metaId => {
-            const meta = res.data.metas[metaName].find(m => m.id === metaId)
-            return meta && meta.nom
-          })
-        }),
-      {
-        fichier: fileName,
-        couleur: domainesCouleurs[params.domaineIds[0]]
-      }
-    )
-
-    const fileContent = {
-      type: 'FeatureCollection',
-      properties,
-      features: res.data.titres.map(titreFormat)
-    }
-
-    const filePath = path.join(__dirname, '../public/geojson/', fileName)
+    )}-${definition.typeIds.join('-')}-${definition.statutIds.join(
+      '-'
+    )}.geojson`
 
     return {
-      fileContent,
-      filePath,
-      properties
+      geojson: {
+        type: 'FeatureCollection',
+        properties: {
+          fichier: fileName,
+          couleur: domainesCouleurs[definition.domaineIds[0]],
+          ...metasFormat(metas, definition)
+        },
+        features: titres.map(titreFormat)
+      },
+      path: join(__dirname, '../public/geojson/', fileName)
     }
   } catch (err) {
     console.log(err)
   }
 }
+
+// parcourt les metas (types, domaines, statuts)
+// et retourne les properties de chaque fichier
+// - types []
+// - domaines []
+// - statuts []
+const metasFormat = (metas, definition) =>
+  Object.keys(metas).reduce(
+    (i, metaName) => ({
+      ...i,
+      ...{
+        // à chaque meta on associe un tableau
+        // qui contient les noms de chaque id inclue dans la définition
+        [metaName]: definition[`${metaName.slice(0, -1)}Ids`].map(metaId => {
+          const meta = metas[metaName].find(m => m.id === metaId)
+          return meta && meta.nom
+        })
+      }
+    }),
+    {}
+  )

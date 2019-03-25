@@ -5,9 +5,6 @@ query Titres(
   $substances: [String!]
   $noms: [String!]
 ) {
-  metas {
-    ...meta
-  }
   titres(
     typeIds: $typeIds
     domaineIds: $domaineIds
@@ -16,22 +13,6 @@ query Titres(
     noms: $noms
   ) {
     ...titre
-  }
-}
-
-fragment meta on Metas {
-  types {
-    id
-    nom
-  }
-  domaines {
-    id
-    nom
-  }
-  statuts {
-    id
-    nom
-    couleur
   }
 }
 

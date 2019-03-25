@@ -6,7 +6,9 @@ const apiFetch = async (apiUrl, query, variables) => {
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ query, variables })
+    body: variables
+      ? JSON.stringify({ query, variables })
+      : JSON.stringify({ query })
   })
 
   return res.json()
