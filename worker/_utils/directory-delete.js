@@ -5,12 +5,13 @@ const dirRm = dir =>
       if (err) {
         reject(err)
       }
+
       resolve(res)
     })
   })
 
-module.exports = async dirPath => {
-  await dirRm(dirPath)
+module.exports = async path => {
+  await dirRm(path)
 
-  console.log('Supprime le répertoire:', dirPath)
+  console.log('Supprime le répertoire:', path)
 }

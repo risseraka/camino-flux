@@ -1,7 +1,7 @@
 const { mkdir } = require('fs').promises
 
-module.exports = async dirPath => {
-  await mkdir(dirPath)
+module.exports = async path => {
+  await mkdir(path)
 
-  console.log('Créé le répertoire:', dirPath)
+  console.log('Créé le répertoire:', path)
 }
