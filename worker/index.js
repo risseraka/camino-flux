@@ -1,6 +1,6 @@
-// efface le dossier /public/geojson et le recréé avec
-// - un fichier geojson par definition présent dans le fichier definitions
-// - un fichier d'infos contenant la liste des fichier geojson générés
+// efface le dossier /public/geojson et le recréé puis ajoute:
+// - un fichier .geojson par definition présent dans le fichier definitions.js
+// - un fichier infos.json contenant la liste des fichiers générés
 
 require('dotenv').config()
 const { join } = require('path')
@@ -13,9 +13,6 @@ const titreFormat = require('./titre-format')
 const definitions = require('./definitions')
 
 const apiUrl = process.env.API_URL
-
-const titresQuery = fileImport(__dirname, 'queries/titres.gql')
-const metasQuery = fileImport(__dirname, 'queries/metas.gql')
 
 const domainesCouleurs = {
   m: '#498bd6',
@@ -33,6 +30,9 @@ const domainesCouleurs = {
 // ------------------------------------
 
 const run = async () => {
+  const titresQuery = await fileImport(join(__dirname, 'queries/titres.gql'))
+  const metasQuery = await fileImport(join(__dirname, 'queries/metas.gql'))
+
   // efface et recréé le dossier cible
   await directoryDelete(join(__dirname, '../public/geojson/'))
   await directoryCreate(join(__dirname, '../public/geojson/'))
@@ -40,7 +40,7 @@ const run = async () => {
   // récupère les metas
   const metas = await metasGet(apiUrl, metasQuery)
 
-  // parcours les définitions
+  // parcourt les définitions
   // et construit un tableau d'objet qui contiennent:
   // - geojson: le contenu du fichier formaté
   // - path: le chemin du fichier
@@ -132,20 +132,20 @@ const fileNameFormat = ({ domaineIds, statutIds, typeIds }) =>
     '-'
   )}.geojson`
 
-// parcourt les metas (types, domaines, statuts)
-// et retourne les properties de chaque fichier
+// pour chaque definition (typeIds, domaineIds, statutIds)
+// retourne un tableau avec les noms correspondant aux ids
 // - types []
 // - domaines []
 // - statuts []
 const metasFormat = (metas, definition) =>
-  Object.keys(metas).reduce(
-    (i, metaName) => ({
-      ...i,
+  Object.keys(definition).reduce(
+    (metasObj, metaIdsName) => ({
+      ...metasObj,
       ...{
-        // à chaque meta on associe un tableau
-        // qui contient les noms de chaque id inclue dans la définition
-        [metaName]: definition[`${metaName.slice(0, -1)}Ids`].map(metaId => {
-          const meta = metas[metaName].find(m => m.id === metaId)
+        [metaIdsName]: definition[metaIdsName].map(metaId => {
+          const meta = metas[`${metaIdsName.slice(0, -3)}s`].find(
+            m => m.id === metaId
+          )
           return meta && meta.nom
         })
       }

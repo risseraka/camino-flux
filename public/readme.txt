@@ -77,7 +77,7 @@ Informations disponibles dans les flux géographiques Camino
                 [
                     [ 
                         Longitudes de chaque sommet au format WGS84,
-                        Latitudes de chaque sommet au format WGS84]
+                        Latitudes de chaque sommet au format WGS84
                     ]
                 ]
             ]
@@ -96,4 +96,7 @@ Liste des flux géographiques disponibles.
 
 La liste des flux géographiques de Camino est disponible dans le fichier “infos.json” (https://flux.camino.beta.gouv.fr/geojson/infos.json)
 
-Ils sont disponibles par type de domaine minier, type de titre et autorisation, type de statut de validité.
+Ils sont disponibles par : 
+- type de domaine minier, 
+- type de titre et autorisation, 
+- type de statut de validité.

@@ -1,4 +1,3 @@
-const fs = require('fs')
-const path = require('path')
+const fs = require('fs').promises
 
-module.exports = (d, p) => fs.readFileSync(path.join(d, p), 'utf8')
+module.exports = async p => (await fs.readFile(p, 'utf8')).toString()

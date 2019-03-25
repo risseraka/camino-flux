@@ -1,9 +1,7 @@
-const fs = require('fs')
-const util = require('util')
-const mkdir = util.promisify(fs.mkdir)
+const { mkdir } = require('fs').promises
 
-module.exports = async (fileName, fileContent) => {
-  await mkdir(fileName)
+module.exports = async dirPath => {
+  await mkdir(dirPath)
 
-  console.log('Directory:', fileName)
+  console.log('Créé le répertoire:', dirPath)
 }

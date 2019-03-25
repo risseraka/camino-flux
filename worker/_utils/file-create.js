@@ -1,8 +1,6 @@
-const fs = require('fs')
-const util = require('util')
-const writeFile = util.promisify(fs.writeFile)
+const { writeFile } = require('fs').promises
 
 module.exports = async (filePath, fileContent) => {
   await writeFile(filePath, fileContent, 'utf8')
-  console.log('File:', filePath)
+  console.log('Créé le fichier:', filePath)
 }

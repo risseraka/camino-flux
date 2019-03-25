@@ -1,9 +1,16 @@
 const rimraf = require('rimraf')
-const util = require('util')
-const directoryDelete = util.promisify(rimraf)
+const dirRm = dir =>
+  new Promise((resolve, reject) => {
+    rimraf(dir, (err, res) => {
+      if (err) {
+        reject(err)
+      }
+      resolve(res)
+    })
+  })
 
-module.exports = async directoryName => {
-  await directoryDelete(directoryName)
+module.exports = async dirPath => {
+  await dirRm(dirPath)
 
-  console.log('Directory:', directoryName)
+  console.log('Supprime le répertoire:', dirPath)
 }

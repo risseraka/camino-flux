@@ -1,4 +1,4 @@
-const sources = [
+const definitions = [
   // --------------------------------------
   {
     domaineIds: ['c'],
@@ -368,4 +368,4 @@ const sources = [
   }
 ]
 
-module.exports = sources
+module.exports = definitions
