@@ -109,6 +109,7 @@ fragment entreprise on Entreprise {
     nom
     dateDebut
   }
+  nom
   legalSiren
   legalEtranger
 }

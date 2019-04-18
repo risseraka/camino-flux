@@ -112,25 +112,8 @@ function titreFormat({
   }
 }
 
-function entrepriseNameFind(entreprise) {
-  return (
-    // si l'entreprise à un nom
-    entreprise.nom ||
-    // sinon, trouve l'établissement le plus récent
-    entreprise.etablissements.reduce(
-      (res, e) =>
-        res &&
-        dateFormat(res.dateDebut, 'yyyy-mm-dd') >
-          dateFormat(e.dateDebut, 'yyyy-mm-dd')
-          ? res
-          : e,
-      null
-    ).nom
-  )
-}
-
 function entrepriseFormat(e) {
-  return `${entrepriseNameFind(e)} (${e.legalSiren || e.legalEtranger})`
+  return `${e.nom} (${e.legalSiren || e.legalEtranger})`
 }
 
 function titreDemarchesPhasesFind(demarches) {
