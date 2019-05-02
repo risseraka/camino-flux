@@ -4,6 +4,8 @@
 
 require('dotenv').config()
 const { join } = require('path')
+var { job } = require('cron')
+
 const fileImport = require('./_utils/file-import')
 const fileCreate = require('./_utils/file-create')
 const directoryDelete = require('./_utils/directory-delete')
@@ -16,6 +18,15 @@ const EXPORT_DIRECTORY = '../public/geojson/'
 const apiUrl = process.env.API_URL
 
 run()
+
+job(
+  '* * 4 * * *',
+  () => {
+    run()
+  },
+  null,
+  true
+)
 
 // ------------------------------------
 // process
@@ -48,8 +59,6 @@ async function run() {
     await infosFileCreate(infos)
   } catch (e) {
     console.error(e)
-  } finally {
-    process.exit()
   }
 }
 

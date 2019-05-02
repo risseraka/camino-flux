@@ -11,7 +11,7 @@
   "scripts": {
     "build": "node --no-warnings ./worker/index.js",
     "dev": "onchange '**/*.js' -i -- npm run build",
-    "start": "npm run build && node ./index.js",
+    "start": "npm run build & node ./index.js",
     "commit": "npx git-cz",
     "release": "standard-version && git push --follow-tags origin master && npx conventional-github-releaser"
   },
@@ -22,10 +22,11 @@
   },
   "dependencies": {
     "compression": "^1.7.4",
+    "cron": "^1.7.1",
     "dateformat": "^3.0.3",
     "dotenv": "^7.0.0",
     "express": "^4.16.4",
-    "node-fetch": "^2.4.1",
+    "node-fetch": "^2.5.0",
     "rimraf": "^2.6.3",
     "serve-index": "^1.9.1"
   },
