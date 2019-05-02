@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [0.8.0](https://github.com/MTES-MCT/camino-ui/compare/v0.7.4...v0.8.0) (2019-05-02)
+
+
+### Bug Fixes
+
+* affiche le nom de l'entreprise ([1181191](https://github.com/MTES-MCT/camino-ui/commit/1181191))
+
+
+### Features
+
+* relance la construction des fichiers tous les jours à 4h ([ca887c0](https://github.com/MTES-MCT/camino-ui/commit/ca887c0))
+* **entreprises:** affiche le nom de l'entreprise ou celui de l'établissement le plus récent ([05a77b4](https://github.com/MTES-MCT/camino-ui/commit/05a77b4))
+
+
+
 ## [0.7.3](https://github.com/MTES-MCT/camino-ui/compare/v0.7.1...v0.7.3) (2019-03-18)
 
 
