@@ -17,15 +17,23 @@ const EXPORT_DIRECTORY = '../public/geojson/'
 
 const apiUrl = process.env.API_URL
 
-run()
-
 job(
+  // cronTime
   '* * 4 * * *',
-  () => {
-    run()
-  },
+  // onTick
+  run,
+  //  onComplete
   null,
+  // start
+  true,
+  // timezone
+  'Europe/Paris',
+  // context
+  null,
+  // runOnInit
   true
+  // utcOffset
+  // unrefTimeout
 )
 
 // ------------------------------------
