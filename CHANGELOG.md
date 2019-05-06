@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.8.2](https://github.com/MTES-MCT/camino-ui/compare/v0.8.0...v0.8.2) (2019-05-06)
+
+
+### Bug Fixes
+
+* **cron:** ajoute la timezone Europe/Paris pour la construction des fichiers ([38b0106](https://github.com/MTES-MCT/camino-ui/commit/38b0106))
+
+
+### Build System
+
+* met à jour les dépendances ([f231cd3](https://github.com/MTES-MCT/camino-ui/commit/f231cd3))
+
+
+
 ### [0.8.1](https://github.com/MTES-MCT/camino-ui/compare/v0.8.0...v0.8.1) (2019-05-06)
 
 

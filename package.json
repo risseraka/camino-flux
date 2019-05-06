@@ -1,6 +1,6 @@
 {
   "name": "camino-flux",
-  "version": "0.8.1",
+  "version": "0.8.2",
   "description": "Flux géographiques de Camino, le cadastre minier numérique ouvert",
   "license": "AGPL-3.0-or-later",
   "repository": {
