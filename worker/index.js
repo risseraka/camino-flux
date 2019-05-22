@@ -19,7 +19,7 @@ const apiUrl = process.env.API_URL
 
 job(
   // cronTime
-  '* * 4 * * *',
+  '00 00 04 * * 1-5',
   // onTick
   run,
   //  onComplete
