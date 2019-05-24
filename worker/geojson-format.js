@@ -70,6 +70,7 @@ function titreFormat({
 }) {
   const dateFin = dateFinFind(titreDemarchesPhasesFind(demarches))
   const dateDebut = dateDebutFind(titreDemarchesPhasesFind(demarches))
+  const dateDemande = dateDemandeFind(demarches)
 
   return {
     type: 'Feature',
@@ -102,7 +103,7 @@ function titreFormat({
         references && references.map(r => `${r.type}: ${r.valeur}`).join(', '),
       date_debut: dateDebut && dateFormat(dateDebut, 'yyyy-mm-dd'),
       date_fin: dateFin && dateFormat(dateFin, 'yyyy-mm-dd'),
-      date_demande: dateFormat(dateDemandeFind(demarches), 'yyyy-mm-dd'),
+      date_demande: dateDemande && dateFormat(dateDemande, 'yyyy-mm-dd'),
       url: `https://camino.beta.gouv.fr/titres/${id}`
     },
     geometry: geojsonMultiPolygon && geojsonMultiPolygon.geometry
@@ -118,7 +119,6 @@ function titreDemarchesPhasesFind(demarches) {
 }
 
 function dateDebutFind(titreDemarchesPhases) {
-  console.log(titreDemarchesPhases)
   return (
     (titreDemarchesPhases.length && titreDemarchesPhases[0].phase.dateDebut) ||
     null
