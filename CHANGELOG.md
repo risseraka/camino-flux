@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.9.0](https://github.com/MTES-MCT/camino-flux/compare/v0.8.4...v0.9.0) (2019-06-11)
+
+
+### Bug Fixes
+
+* change la définition de la tache cron ([9a19026](https://github.com/MTES-MCT/camino-flux/commit/9a19026))
+* corrige la date de début et de fin si le titre n'a pas de phases ([9753c2c](https://github.com/MTES-MCT/camino-flux/commit/9753c2c))
+* corrige la date de demande si il n'y a pas d'étape de demande ([5298a2f](https://github.com/MTES-MCT/camino-flux/commit/5298a2f))
+
+
+### Build System
+
+* met à jour les dépendances ([c2e86c0](https://github.com/MTES-MCT/camino-flux/commit/c2e86c0))
+
+
+### Features
+
+* utilise les date de demande, début et fin retourné par l'api ([0e58de9](https://github.com/MTES-MCT/camino-flux/commit/0e58de9))
+
+
+
 ### [0.8.4](https://github.com/MTES-MCT/camino-flux/compare/v0.8.3...v0.8.4) (2019-05-22)
 
 
