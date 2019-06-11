@@ -35,6 +35,9 @@ fragment titre on Titre {
     type
     valeur
   }
+  dateDebut
+  dateFin
+  dateDemande
   volume
   surface
   volumeUnite {
@@ -57,46 +60,6 @@ fragment titre on Titre {
   }
   geojsonMultiPolygon {
     ...geojsonMultiPolygon
-  }
-  demarches {
-    ...demarche
-  }
-}
-
-fragment demarche on Demarche {
-  id
-  ordre
-  type {
-    id
-    nom
-  }
-  statut {
-    id
-    nom
-  }
-  phase {
-    dateDebut
-    dateFin
-    statut {
-      id
-      nom
-    }
-  }
-  etapes {
-    ...etape
-  }
-}
-
-fragment etape on Etape {
-  ordre
-  date
-  type {
-    id
-    nom
-  }
-  statut {
-    id
-    nom
   }
 }
 

@@ -58,6 +58,9 @@ function titreFormat({
   type,
   domaine,
   statut,
+  dateDebut,
+  dateFin,
+  dateDemande,
   volume,
   volumeUnite,
   surface,
@@ -65,13 +68,8 @@ function titreFormat({
   titulaires,
   amodiataires,
   references,
-  demarches,
   geojsonMultiPolygon
 }) {
-  const dateFin = dateFinFind(titreDemarchesPhasesFind(demarches))
-  const dateDebut = dateDebutFind(titreDemarchesPhasesFind(demarches))
-  const dateDemande = dateDemandeFind(demarches)
-
   return {
     type: 'Feature',
     properties: {
@@ -112,39 +110,6 @@ function titreFormat({
 
 function entrepriseFormat(e) {
   return `${e.nom} (${e.legalSiren || e.legalEtranger})`
-}
-
-function titreDemarchesPhasesFind(demarches) {
-  return demarches.filter(td => td.phase)
-}
-
-function dateDebutFind(titreDemarchesPhases) {
-  return (
-    (titreDemarchesPhases.length && titreDemarchesPhases[0].phase.dateDebut) ||
-    null
-  )
-}
-
-function dateFinFind(titreDemarchesPhases) {
-  return (
-    (titreDemarchesPhases.length &&
-      titreDemarchesPhases[titreDemarchesPhases.length - 1].phase.dateFin) ||
-    null
-  )
-}
-
-function dateDemandeFind(demarches) {
-  return demarches.reduce((date, td) => {
-    if (td.type.id !== 'oct' || date) {
-      return date
-    }
-
-    const etapesMens = td.etapes && td.etapes.filter(te => te.type.id === 'men')
-
-    date = etapesMens.length ? etapesMens[0].date : null
-
-    return date
-  }, null)
 }
 
 module.exports = geojsonFormat
