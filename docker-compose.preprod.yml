@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  flux:
+    build: .
+    environment:
+      VIRTUAL_HOST: preprod.flux.camino.beta.gouv.fr
+      VIRTUAL_PORT: ${NODE_PORT}
+      LETSENCRYPT_HOST: preprod.flux.camino.beta.gouv.fr
+      LETSENCRYPT_EMAIL: risseraka@gmail.com
+      NODE_PORT: ${NODE_PORT}
+    expose:
+      - ${NODE_PORT}
+
+networks:
+  default:
+    external:
+      name: nginx-proxy
