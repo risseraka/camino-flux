@@ -4,9 +4,9 @@ services:
   flux:
     build: .
     environment:
-      VIRTUAL_HOST: preprod.flux.camino.beta.gouv.fr
+      VIRTUAL_HOST: flux.preprod.camino.beta.gouv.fr
       VIRTUAL_PORT: ${NODE_PORT}
-      LETSENCRYPT_HOST: preprod.flux.camino.beta.gouv.fr
+      LETSENCRYPT_HOST: flux.preprod.camino.beta.gouv.fr
       LETSENCRYPT_EMAIL: risseraka@gmail.com
       NODE_PORT: ${NODE_PORT}
     expose:

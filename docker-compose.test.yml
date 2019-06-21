@@ -1,12 +1,12 @@
-version: "3"
+version: '3'
 
 services:
   flux:
     build: .
     environment:
-      VIRTUAL_HOST: test.flux.camino.beta.gouv.fr
+      VIRTUAL_HOST: flux.test.camino.beta.gouv.fr
       VIRTUAL_PORT: ${NODE_PORT}
-      LETSENCRYPT_HOST: test.flux.camino.beta.gouv.fr
+      LETSENCRYPT_HOST: flux.test.camino.beta.gouv.fr
       LETSENCRYPT_EMAIL: francoisromain@gmail.com
       NODE_PORT: ${NODE_PORT}
     expose:
