@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.10.0](https://github.com/MTES-MCT/camino-flux/compare/v0.9.0...v0.10.0) (2019-06-24)
+
+
+### Build System
+
+* met à jour les dépendances ([816976e](https://github.com/MTES-MCT/camino-flux/commit/816976e))
+
+
+### Features
+
+* affiche les pays, régions, départements, communes ([46093e7](https://github.com/MTES-MCT/camino-flux/commit/46093e7))
+* ajoute le docker-compose de preprod ([db93e55](https://github.com/MTES-MCT/camino-flux/commit/db93e55))
+
+
+
 ## [0.9.0](https://github.com/MTES-MCT/camino-flux/compare/v0.8.4...v0.9.0) (2019-06-11)
 
 
