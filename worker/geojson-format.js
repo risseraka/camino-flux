@@ -68,8 +68,42 @@ function titreFormat({
   titulaires,
   amodiataires,
   references,
-  geojsonMultiPolygon
+  geojsonMultiPolygon,
+  pays
 }) {
+  const regions =
+    pays &&
+    pays.length &&
+    pays.reduce(
+      (regions, pay) =>
+        pay.regions && pay.regions.length
+          ? [...regions, ...pay.regions]
+          : regions,
+      []
+    )
+
+  const departements =
+    regions &&
+    regions.length &&
+    regions.reduce(
+      (departements, region) =>
+        region.departements && region.departements.length
+          ? [...departements, ...region.departements]
+          : departements,
+      []
+    )
+
+  const communes =
+    departements &&
+    departements.length &&
+    departements.reduce(
+      (communes, departement) =>
+        departement.communes && departement.communes.length
+          ? [...communes, ...departement.communes]
+          : communes,
+      []
+    )
+
   return {
     type: 'Feature',
     properties: {
@@ -102,7 +136,33 @@ function titreFormat({
       date_debut: dateDebut && dateFormat(dateDebut, 'yyyy-mm-dd'),
       date_fin: dateFin && dateFormat(dateFin, 'yyyy-mm-dd'),
       date_demande: dateDemande && dateFormat(dateDemande, 'yyyy-mm-dd'),
-      url: `https://camino.beta.gouv.fr/titres/${id}`
+      url: `https://camino.beta.gouv.fr/titres/${id}`,
+      pays:
+        (pays && pays.length && pays.map(({ nom }) => nom).join(', ')) || null,
+      regions:
+        (regions &&
+          regions.length &&
+          regions
+            .map(({ nom }) => nom)
+            .sort()
+            .join(', ')) ||
+        null,
+      departements:
+        (departements &&
+          departements.length &&
+          departements
+            .map(({ nom }) => nom)
+            .sort()
+            .join(', ')) ||
+        null,
+      communes:
+        (communes &&
+          communes.length &&
+          communes
+            .map(({ nom }) => nom)
+            .sort()
+            .join(', ')) ||
+        null
     },
     geometry: geojsonMultiPolygon && geojsonMultiPolygon.geometry
   }

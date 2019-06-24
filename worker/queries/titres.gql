@@ -61,6 +61,22 @@ fragment titre on Titre {
   geojsonMultiPolygon {
     ...geojsonMultiPolygon
   }
+  pays {
+    id
+    nom
+    regions {
+      id
+      nom
+      departements {
+        id
+        nom
+        communes {
+          id
+          nom
+        }
+      }
+    }
+  }
 }
 
 fragment administration on Administration {
