@@ -10,7 +10,7 @@
   "main": "index.js",
   "scripts": {
     "build": "node --no-warnings ./worker/index.js",
-    "dev": "onchange '**/*.js' -i -- npm run build",
+    "dev": "onchange '**/*.js' -i -k -- npm run build",
     "start": "npm run build & node ./index.js",
     "commit": "npx git-cz",
     "release": "standard-version && git push --follow-tags origin master && npx conventional-github-releaser"
@@ -31,15 +31,15 @@
     "serve-index": "^1.9.1"
   },
   "devDependencies": {
-    "@types/node": "^12.0.7",
-    "@types/node-fetch": "^2.3.5",
+    "@types/node": "^12.0.10",
+    "@types/node-fetch": "^2.3.7",
     "commitizen": "^3.1.1",
     "conventional-github-releaser": "^3.1.3",
     "cz-conventional-changelog": "^2.1.0",
-    "eslint": "^5.16.0",
-    "eslint-config-prettier": "^4.3.0",
+    "eslint": "^6.0.0",
+    "eslint-config-prettier": "^5.0.0",
     "eslint-config-standard": "^12.0.0",
-    "eslint-plugin-compat": "^3.1.1",
+    "eslint-plugin-compat": "^3.1.2",
     "eslint-plugin-import": "^2.17.3",
     "eslint-plugin-node": "^9.1.0",
     "eslint-plugin-prettier": "^3.1.0",
