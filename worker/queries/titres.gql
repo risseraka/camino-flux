@@ -95,6 +95,9 @@ fragment entreprise on Entreprise {
 
 fragment geojsonMultiPolygon on GeojsonMultiPolygon {
   type
+  properties {
+    etapeId
+  }
   geometry {
     type
     coordinates
@@ -103,8 +106,18 @@ fragment geojsonMultiPolygon on GeojsonMultiPolygon {
 
 fragment geojsonPoints on GeojsonPoints {
   type
+  properties {
+    etapeId
+  }
   features {
     type
+    properties {
+      groupe
+      contour
+      point
+      nom
+      description
+    }
     geometry {
       type
       coordinates
