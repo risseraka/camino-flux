@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.10.1](https://github.com/MTES-MCT/camino-flux/compare/v0.10.0...v0.10.1) (2019-07-15)
+
+
+### Build System
+
+* met à jour les dépendances ([3881017](https://github.com/MTES-MCT/camino-flux/commit/3881017))
+
+
+
 ## [0.10.0](https://github.com/MTES-MCT/camino-flux/compare/v0.9.0...v0.10.0) (2019-06-24)
 
 
