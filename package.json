@@ -31,23 +31,23 @@
     "serve-index": "^1.9.1"
   },
   "devDependencies": {
-    "@types/node": "^12.6.2",
-    "@types/node-fetch": "^2.3.7",
-    "commitizen": "^3.1.1",
+    "@types/node": "^12.6.8",
+    "@types/node-fetch": "^2.5.0",
+    "commitizen": "^4.0.3",
     "conventional-github-releaser": "^3.1.3",
-    "cz-conventional-changelog": "^2.1.0",
-    "eslint": "^6.0.1",
+    "cz-conventional-changelog": "^3.0.2",
+    "eslint": "^6.1.0",
     "eslint-config-prettier": "^6.0.0",
     "eslint-config-standard": "^13.0.1",
-    "eslint-plugin-compat": "^3.2.0",
-    "eslint-plugin-import": "^2.18.0",
+    "eslint-plugin-compat": "^3.3.0",
+    "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-node": "^9.1.0",
     "eslint-plugin-prettier": "^3.1.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.0",
     "onchange": "^6.0.0",
     "prettier": "^1.18.2",
-    "standard-version": "^6.0.1"
+    "standard-version": "^7.0.0"
   },
   "config": {
     "commitizen": {
