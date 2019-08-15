@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.10.3](https://github.com/MTES-MCT/camino-flux/compare/v0.10.2...v0.10.3) (2019-08-15)
+
+
+### Features
+
+* met à jour l'API ([0d08414](https://github.com/MTES-MCT/camino-flux/commit/0d08414))
+
 ### [0.10.2](https://github.com/MTES-MCT/camino-flux/compare/v0.10.1...v0.10.2) (2019-08-01)
 
 ### [0.10.1](https://github.com/MTES-MCT/camino-flux/compare/v0.10.0...v0.10.1) (2019-07-15)
