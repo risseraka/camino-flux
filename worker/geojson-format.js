@@ -1,5 +1,3 @@
-const dateFormat = require('dateformat')
-
 const domainesCouleurs = {
   m: '#498bd6',
   h: '#856940',
@@ -133,9 +131,9 @@ function titreFormat({
         null,
       references:
         references && references.map(r => `${r.type}: ${r.valeur}`).join(', '),
-      date_debut: dateDebut && dateFormat(dateDebut, 'yyyy-mm-dd'),
-      date_fin: dateFin && dateFormat(dateFin, 'yyyy-mm-dd'),
-      date_demande: dateDemande && dateFormat(dateDemande, 'yyyy-mm-dd'),
+      date_debut: dateDebut,
+      date_fin: dateFin,
+      date_demande: dateDemande,
       url: `https://camino.beta.gouv.fr/titres/${id}`,
       pays:
         (pays && pays.length && pays.map(({ nom }) => nom).join(', ')) || null,
