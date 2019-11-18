@@ -130,7 +130,7 @@ function titreFormat({
           amodiataires.map(t => entrepriseFormat(t)).join(', ')) ||
         null,
       references:
-        references && references.map(r => `${r.type}: ${r.valeur}`).join(', '),
+        references && references.map(r => `${r.type.nom}: ${r.nom}`).join(', '),
       date_debut: dateDebut,
       date_fin: dateFin,
       date_demande: dateDemande,

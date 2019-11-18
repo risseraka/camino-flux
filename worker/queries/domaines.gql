@@ -1,0 +1,6 @@
+query Domaines {
+  domaines {
+    id
+    nom
+  }
+}

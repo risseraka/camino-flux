@@ -44,7 +44,13 @@ async function run() {
   try {
     // importe les requêtes graphQL
     const titresQuery = await fileImport(join(__dirname, 'queries/titres.gql'))
-    const metasQuery = await fileImport(join(__dirname, 'queries/metas.gql'))
+    const typesQuery = await fileImport(join(__dirname, 'queries/types.gql'))
+    const domainesQuery = await fileImport(
+      join(__dirname, 'queries/domaines.gql')
+    )
+    const statutsQuery = await fileImport(
+      join(__dirname, 'queries/statuts.gql')
+    )
 
     // efface le dossier cible et son contenu
     await directoryDelete(join(__dirname, EXPORT_DIRECTORY))
@@ -52,8 +58,14 @@ async function run() {
     // créé le dossier cible
     await directoryCreate(join(__dirname, EXPORT_DIRECTORY))
 
-    // récupère les metas
-    const metas = await metasGet(apiUrl, metasQuery)
+    // récupère les types
+    const types = await typesGet(apiUrl, typesQuery)
+    // récupère les domaines
+    const domaines = await domainesGet(apiUrl, domainesQuery)
+    // récupère les statuts
+    const statuts = await statutsGet(apiUrl, statutsQuery)
+
+    const metas = { types, domaines, statuts }
 
     // parcourt les définitions et construit un tableau de geojsons
     // dont l'entrée properties contient, entre autre le nom du fichier
@@ -74,10 +86,22 @@ async function run() {
 // fonctions
 // ------------------------------------
 
-async function metasGet(url, query) {
+async function typesGet(url, query) {
   const res = await apiFetch(url, JSON.stringify({ query }))
 
-  return res && res.data && res.data.metas
+  return res && res.data && res.data.types
+}
+
+async function domainesGet(url, query) {
+  const res = await apiFetch(url, JSON.stringify({ query }))
+
+  return res && res.data && res.data.domaines
+}
+
+async function statutsGet(url, query) {
+  const res = await apiFetch(url, JSON.stringify({ query }))
+
+  return res && res.data && res.data.statuts
 }
 
 async function titresGet(url, query, variables) {
