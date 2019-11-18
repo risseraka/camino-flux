@@ -1,0 +1,6 @@
+query Types {
+  types {
+    id
+    nom
+  }
+}

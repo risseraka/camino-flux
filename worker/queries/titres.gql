@@ -32,8 +32,7 @@ fragment titre on Titre {
     nom
   }
   references {
-    type
-    valeur
+    ...reference
   }
   dateDebut
   dateFin
@@ -133,4 +132,12 @@ fragment substance on TitreSubstance {
   legales {
     nom
   }
+}
+
+fragment reference on Reference {
+  type {
+    id
+    nom
+  }
+  nom
 }
