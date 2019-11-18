@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.10.5](https://github.com/MTES-MCT/camino-flux/compare/v0.10.4...v0.10.5) (2019-11-18)
+
+
+### Features
+
+* **api:** limite la liste des types de références métier ([31e9352](https://github.com/MTES-MCT/camino-flux/commit/31e9352))
+* **flux:** limite la liste des types de références métier ([6931fa3](https://github.com/MTES-MCT/camino-flux/commit/6931fa3))
+
 ### [0.10.4](https://github.com/MTES-MCT/camino-flux/compare/v0.10.3...v0.10.4) (2019-10-14)
 
 ### [0.10.3](https://github.com/MTES-MCT/camino-flux/compare/v0.10.2...v0.10.3) (2019-08-15)
