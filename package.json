@@ -31,13 +31,13 @@
     "serve-index": "^1.9.1"
   },
   "devDependencies": {
-    "@types/node": "^12.12.8",
+    "@types/node": "^12.12.11",
     "@types/node-fetch": "^2.5.3",
     "commitizen": "^4.0.3",
     "conventional-github-releaser": "^3.1.3",
     "cz-conventional-changelog": "^3.0.2",
     "eslint": "^6.6.0",
-    "eslint-config-prettier": "^6.6.0",
+    "eslint-config-prettier": "^6.7.0",
     "eslint-config-standard": "^14.1.0",
     "eslint-plugin-compat": "^3.3.0",
     "eslint-plugin-import": "^2.18.2",
@@ -48,7 +48,7 @@
     "npm-check-updates": "^3.2.1",
     "onchange": "^6.1.0",
     "prettier": "^1.19.1",
-    "standard-version": "^7.0.0"
+    "standard-version": "^7.0.1"
   },
   "config": {
     "commitizen": {
