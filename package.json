@@ -11,6 +11,7 @@
   "scripts": {
     "build": "node --no-warnings ./worker/index.js",
     "dev": "onchange '**/*.js' -i -k -- npm run build",
+    "dev:update": "npm-check-updates -u && npm install && npm audit fix",
     "start": "npm run build & node ./index.js",
     "commit": "npx git-cz",
     "release": "standard-version && git push --follow-tags origin master && npx conventional-github-releaser"
@@ -44,6 +45,7 @@
     "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
+    "npm-check-updates": "^3.2.1",
     "onchange": "^6.1.0",
     "prettier": "^1.19.1",
     "standard-version": "^7.0.0"
