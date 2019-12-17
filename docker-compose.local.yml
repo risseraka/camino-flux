@@ -9,9 +9,10 @@ services:
       VIRTUAL_HOST: ${URL}
       VIRTUAL_PORT: ${NODE_PORT}
       NODE_PORT: ${NODE_PORT}
-      HTTPS_METHOD: noredirect
     expose:
       - ${NODE_PORT}
+    env_file: .env
+    restart: always
 
 networks:
   default:

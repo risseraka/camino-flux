@@ -11,6 +11,8 @@ services:
       NODE_PORT: ${NODE_PORT}
     expose:
       - ${NODE_PORT}
+    env_file: .env
+    restart: always
 
 networks:
   default:
