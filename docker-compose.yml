@@ -11,7 +11,8 @@ services:
       NODE_PORT: ${NODE_PORT}
     expose:
       - ${NODE_PORT}
-    env_file: .env
+    volumes:
+      - ./.env:/app/.env
     restart: always
 
 networks:
