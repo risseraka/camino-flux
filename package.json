@@ -11,7 +11,7 @@
   "scripts": {
     "build": "node --no-warnings ./worker/index.js",
     "dev": "onchange '**/*.js' -i -k -- npm run build",
-    "start": "npm run build && node ./index.js",
+    "start": "npm run build & node ./index.js",
     "commit": "npx git-cz",
     "release": "standard-version && git push --follow-tags upstream master && npx conventional-github-releaser"
   },
