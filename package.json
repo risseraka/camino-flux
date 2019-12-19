@@ -13,7 +13,7 @@
     "dev": "onchange '**/*.js' -i -k -- npm run build",
     "start": "npm run build && node ./index.js",
     "commit": "npx git-cz",
-    "release": "standard-version && git push --follow-tags origin master && npx conventional-github-releaser"
+    "release": "standard-version && git push --follow-tags upstream master && npx conventional-github-releaser"
   },
   "author": {
     "name": "François Romain",
@@ -31,7 +31,7 @@
     "serve-index": "^1.9.1"
   },
   "devDependencies": {
-    "@types/node": "^12.12.20",
+    "@types/node": "^12.12.21",
     "@types/node-fetch": "^2.5.4",
     "commitizen": "^4.0.3",
     "conventional-github-releaser": "^3.1.3",
