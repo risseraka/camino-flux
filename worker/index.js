@@ -79,6 +79,8 @@ async function run() {
     await infosFileCreate(infos)
   } catch (e) {
     console.error(e)
+  } finally {
+    process.exit()
   }
 }
 
