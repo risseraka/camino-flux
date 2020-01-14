@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.10.7](https://github.com/MTES-MCT/camino-flux/compare/v0.10.6...v0.10.7) (2020-01-14)
+
+
+### Features
+
+* **flux:** active les fluxs ARM valides / échues / classées ([#3](https://github.com/MTES-MCT/camino-flux/issues/3)) ([ffeae89](https://github.com/MTES-MCT/camino-flux/commit/ffeae894680d754b0a64b66d1ef79f2e920a4328))
+
+
+### Bug Fixes
+
+* corrige la commande de démarrage ([698857e](https://github.com/MTES-MCT/camino-flux/commit/698857e4303b3f786eecc49293fd1c5968252fad))
+* stoppe le process après avoir généré les flux ([eb4a2da](https://github.com/MTES-MCT/camino-flux/commit/eb4a2dae8d21d70cfcf936f10985a07ca9a82c87))
+
 ### [0.10.6](https://github.com/MTES-MCT/camino-flux/compare/v0.10.5...v0.10.6) (2019-12-19)
 
 ### [0.10.5](https://github.com/MTES-MCT/camino-flux/compare/v0.10.4...v0.10.5) (2019-11-18)
