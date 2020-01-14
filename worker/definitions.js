@@ -206,6 +206,11 @@ const definitions = [
   },
   {
     domaineIds: ['m'],
+    typeIds: ['arm'],
+    statutIds: ['val']
+  },
+  {
+    domaineIds: ['m'],
     typeIds: ['axm'],
     statutIds: ['mod', 'val']
   },
@@ -256,6 +261,11 @@ const definitions = [
   },
   {
     domaineIds: ['m'],
+    typeIds: ['arm'],
+    statutIds: ['ech']
+  },
+  {
+    domaineIds: ['m'],
     typeIds: ['axm'],
     statutIds: ['ech']
   },
@@ -273,6 +283,11 @@ const definitions = [
     domaineIds: ['m'],
     typeIds: ['pxm'],
     statutIds: ['ech']
+  },
+  {
+    domaineIds: ['m'],
+    typeIds: ['arm'],
+    statutIds: ['dmc']
   },
   // --------------------------------------
   {
