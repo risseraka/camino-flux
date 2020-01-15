@@ -13,8 +13,11 @@ Github : https://github.com/MTES-MCT/camino-flux
 ---
 
 Les flux géographiques Camino exposent les informations administratives et géographiques pour : 
-- les titres miniers valides et demandes initiales ou modificatives afférentes publiques et en cours d'instruction. 
-- les autorisations d’exploitation en Guyane.
+- les autorisations et titres miniers valides et faisant l'objet d'une demande de modification en instance,
+- les autorisations de recherches minières échues en Guyane (ARM),
+- les demandes initiales publiques en cours d'instruction de titres miniers et d'autorisations d’exploitation minière en Guyane (AEX),
+- les demandes d'autorisation de recherches minières classées en Guyane (ARM).
+
 
 Les données sont publiées au format Geojson. C'est un format ouvert et réutilisable qui permet notamment l’utilisation de ces données par des services tiers ou des logiciels de visualisation ou gestion d’information géographique.
 
@@ -54,7 +57,7 @@ Informations disponibles dans les flux géographiques Camino
         "nom": "nom du titre",
         "type": "type de titre",
         "domaine": "type de domaine minier",
-        "statut": "statut du titre [demande initiale / valide / modification en instance",
+        "statut": "statut du titre [demande initiale / valide / modification en instance / demande classée / échu]",
         "volume": “volume si applicable”,
         "surface": “surface légale indiquée dans l’acte”,
         "substances": “liste des substances légales”,
