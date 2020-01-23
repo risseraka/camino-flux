@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.10.9](https://github.com/MTES-MCT/camino-flux/compare/v0.10.8...v0.10.9) (2020-01-23)
+
+
+### Bug Fixes
+
+* **cron:** ne quitte pas le process du worker ([123b744](https://github.com/MTES-MCT/camino-flux/commit/123b744c57043869e8fb6dc79161e948e1bc511f))
+
 ### [0.10.8](https://github.com/MTES-MCT/camino-flux/compare/v0.10.7...v0.10.8) (2020-01-20)
 
 ### [0.10.7](https://github.com/MTES-MCT/camino-flux/compare/v0.10.6...v0.10.7) (2020-01-14)
