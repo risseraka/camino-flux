@@ -28,26 +28,26 @@ function fileNameFormat({ domaineIds, statutIds, typeIds }) {
   )}.geojson`
 }
 
-// pour chaque definition (typeIds, domaineIds, statutIds)
+// pour chaque definition (domaineIds, statutIds)
 // retourne un tableau avec les noms correspondant aux ids
-// - types: []
 // - domaines: []
+// - types: []
 // - statuts: []
 function metasFormat(definition, metas) {
-  return Object.keys(definition).reduce(
-    (metasObj, metaIdsName) => ({
-      ...metasObj,
-      ...{
-        [metaIdsName]: definition[metaIdsName].map(metaId => {
-          const meta = metas[`${metaIdsName.slice(0, -3)}s`].find(
-            m => m.id === metaId
-          )
-          return meta && meta.nom
-        })
-      }
-    }),
-    {}
-  )
+  return Object.keys(definition).reduce((metasObj, metaIdsName) => {
+    if (metaIdsName === 'domaines') {
+      definition[metaIdsName].reduce((metasObj, metaId) => {
+        const domaine = metas[`${metaIdsName.slice(0, -3)}s`].find(
+          m => m.id === metaId
+        )
+
+        return metasObj
+      }, metasObj)
+    } else {
+    }
+
+    return metasObj
+  }, {})
 }
 
 function titreFormat({
@@ -107,7 +107,7 @@ function titreFormat({
     properties: {
       id: id,
       nom: nom,
-      type: type.nom,
+      type: type.type.nom,
       domaine: domaine.nom,
       statut: statut.nom,
       volume: volume && `${volume} ${volumeUnite.nom}`,
