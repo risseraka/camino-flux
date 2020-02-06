@@ -9,48 +9,9 @@ const domainesCouleurs = {
   f: '#a8782f'
 }
 
-// pour une definition, retourne le contenu du geojson formaté
-function geojsonFormat(definition, titres, metas) {
-  return {
-    type: 'FeatureCollection',
-    properties: {
-      fichier: fileNameFormat(definition),
-      couleur: domainesCouleurs[definition.domaineIds[0]],
-      ...metasFormat(definition, metas)
-    },
-    features: titres.map(titreFormat)
-  }
-}
+const entrepriseFormat = e => `${e.nom} (${e.legalSiren || e.legalEtranger})`
 
-function fileNameFormat({ domaineIds, statutIds, typeIds }) {
-  return `titres-${domaineIds.join('-')}-${typeIds.join('-')}-${statutIds.join(
-    '-'
-  )}.geojson`
-}
-
-// pour chaque definition (domaineIds, statutIds)
-// retourne un tableau avec les noms correspondant aux ids
-// - domaines: []
-// - types: []
-// - statuts: []
-function metasFormat(definition, metas) {
-  return Object.keys(definition).reduce((metasObj, metaIdsName) => {
-    if (metaIdsName === 'domaines') {
-      definition[metaIdsName].reduce((metasObj, metaId) => {
-        const domaine = metas[`${metaIdsName.slice(0, -3)}s`].find(
-          m => m.id === metaId
-        )
-
-        return metasObj
-      }, metasObj)
-    } else {
-    }
-
-    return metasObj
-  }, {})
-}
-
-function titreFormat({
+const titreFormat = ({
   id,
   nom,
   type,
@@ -68,7 +29,7 @@ function titreFormat({
   references,
   geojsonMultiPolygon,
   pays
-}) {
+}) => {
   const regions =
     pays &&
     pays.length &&
@@ -113,61 +74,122 @@ function titreFormat({
       volume: volume && `${volume} ${volumeUnite.nom}`,
       surface: surface && `${surface} km²`,
       substances:
-        (substances &&
-          substances.length &&
-          substances
-            .map(s => s.legales && s.legales.map(sl => sl.nom).join(', '))
-            .join(', ')) ||
-        null,
+        substances && substances.length
+          ? substances
+              .map(s => s.legales && s.legales.map(sl => sl.nom).join(', '))
+              .join(', ')
+          : null,
       titulaires:
-        (titulaires &&
-          titulaires.length &&
-          titulaires.map(t => entrepriseFormat(t)).join(', ')) ||
-        null,
+        titulaires && titulaires.length
+          ? titulaires.map(t => entrepriseFormat(t)).join(', ')
+          : null,
       amodiataires:
-        (amodiataires &&
-          amodiataires.length &&
-          amodiataires.map(t => entrepriseFormat(t)).join(', ')) ||
-        null,
-      references:
-        references && references.map(r => `${r.type.nom}: ${r.nom}`).join(', '),
+        amodiataires && amodiataires.length
+          ? amodiataires.map(t => entrepriseFormat(t)).join(', ')
+          : null,
+      references: references
+        ? references.map(r => `${r.type.nom}: ${r.nom}`).join(', ')
+        : null,
       date_debut: dateDebut,
       date_fin: dateFin,
       date_demande: dateDemande,
       url: `https://camino.beta.gouv.fr/titres/${id}`,
-      pays:
-        (pays && pays.length && pays.map(({ nom }) => nom).join(', ')) || null,
+      pays: pays && pays.length ? pays.map(({ nom }) => nom).join(', ') : null,
       regions:
-        (regions &&
-          regions.length &&
-          regions
-            .map(({ nom }) => nom)
-            .sort()
-            .join(', ')) ||
-        null,
+        regions && regions.length
+          ? regions
+              .map(({ nom }) => nom)
+              .sort()
+              .join(', ')
+          : null,
       departements:
-        (departements &&
-          departements.length &&
-          departements
-            .map(({ nom }) => nom)
-            .sort()
-            .join(', ')) ||
-        null,
+        departements && departements.length
+          ? departements
+              .map(({ nom }) => nom)
+              .sort()
+              .join(', ')
+          : null,
       communes:
-        (communes &&
-          communes.length &&
-          communes
-            .map(({ nom }) => nom)
-            .sort()
-            .join(', ')) ||
-        null
+        communes && communes.length
+          ? communes
+              .map(({ nom }) => nom)
+              .sort()
+              .join(', ')
+          : null
     },
     geometry: geojsonMultiPolygon && geojsonMultiPolygon.geometry
   }
 }
 
-function entrepriseFormat(e) {
-  return `${e.nom} (${e.legalSiren || e.legalEtranger})`
+const fileNameFormat = ({ domaines, types, statuts }) => {
+  return `titres-${domaines.map(d => d.id).join('-')}-${types
+    .map(t => t.id)
+    .join('-')}-${statuts.map(s => s.id).join('-')}.geojson`
+}
+
+// pour chaque variables (domaineIds, statutIds)
+// retourne un tableau avec les noms correspondant aux ids
+// - domaines: []
+// - types: []
+// - statuts: []
+const metasFormat = metas =>
+  Object.keys(metas).reduce((metasObj, metaName) => {
+    metasObj[`${metaName.slice(0, -1)}Ids`] = metas[metaName].map(
+      m => m.nom || m.type.nom
+    )
+    return metasObj
+  }, {})
+
+const metasBuild = (variables, metas) =>
+  Object.keys(variables).reduce((metasObj, metaIdsName) => {
+    const metaNamePlural = `${metaIdsName.slice(0, -3)}s`
+
+    metasObj[metaNamePlural] = []
+
+    variables[metaIdsName].reduce((metasObj, metaId) => {
+      // cas particulier pour les types,
+      // car on les récupère dans les domaines
+      if (metaNamePlural === 'types') {
+        const titresTypes = metas.domaines.reduce(
+          (titresTypes, d) =>
+            // si le domaine fait partie de la liste de domaines dans les variables
+            variables.domaineIds.includes(d.id)
+              ? // alors on cherche tous les types faisant partie de la liste de types
+                titresTypes.concat(
+                  d.titresTypes.filter(t => t.type.id === metaId)
+                )
+              : titresTypes,
+          []
+        )
+
+        metasObj[metaNamePlural].push(...titresTypes)
+      } else {
+        // pour les domaines et les statuts,
+        // on cherche directement dans les metas
+        const meta = metas[metaNamePlural].find(m => m.id === metaId)
+
+        metasObj[metaNamePlural].push(meta)
+      }
+
+      return metasObj
+    }, metasObj)
+
+    return metasObj
+  }, {})
+
+// pour une definition, retourne le contenu du geojson formaté
+const geojsonFormat = (titres, variables, metas) => {
+  const { domaines, types, statuts } = metasBuild(variables, metas)
+
+  return {
+    type: 'FeatureCollection',
+    properties: {
+      fichier: fileNameFormat({ domaines, types, statuts }),
+      couleur: domainesCouleurs[variables.domaineIds[0]],
+      ...metasFormat({ domaines, types, statuts })
+    },
+    features: titres.map(titreFormat)
+  }
 }
 
 module.exports = geojsonFormat

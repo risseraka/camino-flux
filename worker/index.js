@@ -17,30 +17,59 @@ const EXPORT_DIRECTORY = '../public/geojson/'
 
 const apiUrl = process.env.API_URL
 
-job(
-  // cronTime
-  '00 00 04 * * 1-5',
-  // onTick
-  run,
-  //  onComplete
-  null,
-  // start
-  true,
-  // timezone
-  'Europe/Paris',
-  // context
-  null,
-  // runOnInit
-  true
-  // utcOffset
-  // unrefTimeout
-)
+// ------------------------------------
+// fonctions
+// ------------------------------------
+
+const apiGet = async (url, { query, variables = {} }, prop) => {
+  const res = await apiFetch(url, JSON.stringify({ query, variables }))
+
+  return res && res.data && res.data[prop]
+}
+
+const geojsonsBuild = async (definitions, query, metas) =>
+  definitions.reduce(async (geojsons, variables) => {
+    // récupère les titres
+    let titres = await apiGet(apiUrl, { query, variables }, 'titres')
+
+    // Note: inconvénient, quand tous les titres valides d'un domaine
+    // et d'un type passent en échu (ex ARM), le flux disparaît
+    if (!titres || !titres.length) return geojsons
+
+    // si la réponse contient des titres
+    // formate les données et les ajoute
+    titres = geojsonFormat(titres, variables, metas)
+
+    return (await geojsons).concat(titres)
+  }, Promise.resolve([]))
+
+const filesCreate = async geojsons =>
+  Promise.all(
+    geojsons.map(async geojson => {
+      await fileCreate(
+        join(__dirname, EXPORT_DIRECTORY, geojson.properties.fichier),
+        JSON.stringify(geojson, null, 2)
+      )
+
+      return geojson.properties
+    })
+  )
+
+// génère un fichier infos contenant la liste des fichiers générés
+const infosFileCreate = async infos => {
+  await fileCreate(
+    join(__dirname, EXPORT_DIRECTORY, 'infos.json'),
+    JSON.stringify(infos, null, 2)
+  )
+
+  console.log(`${infos.length} fichiers générés`)
+}
 
 // ------------------------------------
 // process
 // ------------------------------------
 
-async function run() {
+const run = async () => {
   try {
     // importe les requêtes graphQL
     const titresQuery = await fileImport(join(__dirname, 'queries/titres.gql'))
@@ -79,48 +108,21 @@ async function run() {
   }
 }
 
-// ------------------------------------
-// fonctions
-// ------------------------------------
-
-async function apiGet(url, { query, variables = {} }, prop) {
-  const res = await apiFetch(url, JSON.stringify({ query, variables }))
-
-  return res && res.data && res.data[prop]
-}
-
-async function geojsonsBuild(definitions, query, metas) {
-  return definitions.reduce(async (geojsons, variables) => {
-    // récupère les titres
-    const titres = await apiGet(apiUrl, { query, variables }, 'titres')
-
-    // si la réponse contient des titres
-    return titres && titres.length
-      ? // formate les données et les ajoute
-        [...(await geojsons), geojsonFormat(variables, titres, metas)]
-      : geojsons
-  }, Promise.resolve([]))
-}
-
-async function filesCreate(geojsons) {
-  return Promise.all(
-    geojsons.map(async geojson => {
-      await fileCreate(
-        join(__dirname, EXPORT_DIRECTORY, geojson.properties.fichier),
-        JSON.stringify(geojson, null, 2)
-      )
-
-      return geojson.properties
-    })
-  )
-}
-
-// génère un fichier infos contenant la liste des fichiers générés
-async function infosFileCreate(infos) {
-  await fileCreate(
-    join(__dirname, EXPORT_DIRECTORY, 'infos.json'),
-    JSON.stringify(infos, null, 2)
-  )
-
-  console.log(`${infos.length} fichiers générés`)
-}
+job(
+  // cronTime
+  '00 00 04 * * 1-5',
+  // onTick
+  run,
+  //  onComplete
+  null,
+  // start
+  true,
+  // timezone
+  'Europe/Paris',
+  // context
+  null,
+  // runOnInit
+  true
+  // utcOffset
+  // unrefTimeout
+)

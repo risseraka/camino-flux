@@ -4,6 +4,10 @@ query Domaines {
     nom
     titresTypes {
       id
+      type {
+        id
+        nom
+      }
     }
   }
 }
